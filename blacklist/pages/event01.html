@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properities -->
+  <title>Blacklist</title>
+
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="../packaged/css/semantic.css">
+  <link rel="stylesheet" type="text/css" href="index.css">
+ 
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js"></script>
+  <script src="../packaged/javascript/semantic.js"></script>
+  <script src="index.js"></script>
+  
+  <!-- Sort Tables -->
+  <script src="jquery.tablesort.js"></script>
+  <script type="text/javascript">
+  $(function() {
+
+		var table = $('<table></table>');
+		table.append('<thead><tr><th class="number">Number</th></tr></thead>');
+		var tbody = $('<tbody></tbody>');
+		for(var i = 0; i<100; i++) {
+			tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
+		}
+		table.append(tbody);
+		$('.example.ex-2').append(table);
+
+		$('table').tablesort().data('tablesort');
+
+		$('thead th.number').data('sortBy', function(th, td, sorter) {
+			return parseInt(td.text(), 10);
+		});
+
+	});
+  </script>
+
+
+
+</head>
+<body id="home">
+	
+<div class="ui inverted menu">
+  <a class="active item" href="index.html">
+    <i class="home icon"></i> Home
+  </a>
+  <a class="item">
+    <i class="user icon"></i> About
+  </a>
+  <a class="item">
+    <i class="mail icon"></i> Contact
+  </a>
+  
+  <div class="right menu">
+    <div class="item">
+      <div class="ui mini icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+  
+</div>
+ <h2 class="ui header">
+ <i class="thumbs down outline icon"></i>
+ The Blacklist</h2>
+ <div class="ui primary segment">
+   <p>收集議題關注者、NGO、NPO 的不推薦名單</p>
+</div>
+
+
+<div class="ui celled grid">
+   <div class="row">
+   	<div class="one wide column" style="">
+   	</div>
+    <div class="one wide column" style="">
+    	<div class="ui ribbon red label">名單選擇</div>
+    	<div class="ui basic vertical accordion menu">
+         <div class="item">
+         
+               <div class="grouped inline fields">
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group1">
+                     <label>有疑慮</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group2">
+                     <label>不推薦</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group3">
+                     <label>強烈反對</label>
+                   </div>
+                 </div>
+               </div>          
+         </div>        
+      </div>
+      <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
+    	<div class="ui basic vertical accordion menu">
+    		 <div class="item">
+    		  <a class="active title">
+              <div class="ui checkbox">
+              <input type="checkbox" name="small">
+              <label>所有</label>
+              </div>
+          </a>
+         </div>
+         <div class="item">
+           <a class="active title">
+             <i class="dropdown icon"></i>
+             環保
+           </a>
+           <div class="active content menu">
+             <div class="ui form item">
+               <div class="grouped inline fields">
+               	 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group1">
+                     <label>所有</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group1">
+                     <label>綠盟</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group2">
+                     <label>地球公民</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group3">
+                     <label>環盟</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="group4">
+                     <label>主婦聯盟</label>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="item">
+           <a class="active title">
+             <i class="dropdown icon"></i>
+             土地
+           </a>
+           <div class="active content menu">
+             <div class="ui form item">
+               <div class="grouped inline fields">
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="small">
+                     <label>農陣</label>
+                   </div>
+                 </div>
+                
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="item">
+           <a class="active title">
+             <i class="dropdown icon"></i>
+             性別
+           </a>
+           <div class="active content menu">
+             <div class="ui form item">
+               <div class="grouped inline fields">
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="small">
+                     <label>所有</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="small">
+                     <label>婦女新知</label>
+                   </div>
+                 </div>
+                 <div class="field">
+                   <div class="ui checkbox">
+                     <input type="checkbox" name="small">
+                     <label>台女連</label>
+                   </div>
+                 </div>
+                
+               </div>
+               
+             </div>
+           </div>
+         </div>
+       
+      </div>
+        
+         <a class="ui mini red button">看結果</a>
+      
+    </div>
+    <div class="ten wide middle column" style="">
+   
+       <div class="ui segment">
+       	
+       	<div><h2 class="ui info">
+        	公職人員利益衝突迴避法第九條及第十五條條文修正草案
+        	<div class="ui top right attached purple label">利益迴避</div></h2>
+        </div>
+        
+        <div class="ui secondary segment">
+          <p>事件摘要：放寬利益迴避相關規範，恐將使利益輸送情況加劇。</p>
+          <p>所屬名單：公督盟、強烈反對</p>
+          <p>更新日期：2013-12-24</p>
+        </div>
+        
+         <h3 class="ui dividing header">相關人士</h3>
+         <p>主提案人：呂小章、王小升</p>
+       
+         
+         <h3 class="ui dividing header">完整說明</h3>
+         <p>本法修正重點如下：</p>
+         <p>一、限制公職人員之關係人與機關交易應合乎憲法比例原則【第九條】</p>
+         <p>公職人員得依據透明公開之政府採購機制及交易標的係機關提供，並具公定價格之情形者，排除本法規定之適用。</p>
+         <p>對於本條，監察院認為若將「依政府採購法規定辦理採購者」全面排除，對於公職人員以技術手段（例如切割標案、增設特殊競標條件、規格等），將原應公開招標者，轉變成為限制性招標或選擇性招標之情形勢難以規範，恐成為利益輸送之黑洞。又許多交易行為並無採購法之適用（例如：國有財產之標售），故僅將依採購法辦理採購者，排除於本法適用之外，對人民權益之保障是否完備，允宜慎酌。</p>
+
+         <p>二、本法裁罰數額與級距應有調整必要【第十五條】</p>
+         <p>公職人員或其關係人如與公職人員服務之機關或其受監督之機關為特定交易行為時，原第十五條規定處以交易行為金額一倍至三倍之罰鍰。然如交易行為金額甚高，科罰一倍至三倍罰鍰，將導致違反行政法上義務之罰鍰較違反刑事違法案件之罰金數額還高，其顯然未符比例原則，導致處罰輕重失衡之現象，故依據不同違法行為之態樣，調整罰鍰基準及級距。（修正條文第十五條）</p>
+         <p>對於本條，法務部認為：本部受理裁罰案件案中，多數為公職人員之關係人與該公職人員服務之機關或監督之機關為交易行為，且尤以工程採購案交易金額動輒上百萬至數千萬元，如裁罰級距最高為500萬元，將造成類此高額工程採購案件關係人存僥倖之心態。而本法第9條已增定多數交易行為禁止之例外，裁罰級距以維持現行規範較宜。</p>
+         </div>
+        
+         <h3 class="ui dividing header">原始資料</h3>
+         <div class="ui list">
+          <a class="item">
+            <i class="right triangle icon"></i>
+            公職人員利益衝突迴避法第九條及第十五條條文修正草案
+          </a>
+          <a class="item">
+            <i class="right triangle icon"></i>
+            立法院會議紀錄
+          </a>
+          <a class="item">
+            <i class="right triangle icon"></i>
+            監察院意見
+          </a>
+          <a class="item">
+            <i class="right triangle icon"></i>
+            法務部意見
+          </a>
+        </div>
+         
+         
+       </div>
+      
+  
+     
+      
+    </div>
+    <div class="one wide column" style="">
+   	</div>
+    
+  </div>
+</div>
+
+      
+	
+	
+	 
+  
+</body>
+</html>
