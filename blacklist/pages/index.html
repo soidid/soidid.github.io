@@ -13,15 +13,17 @@
   <link rel="stylesheet" type="text/css" href="index.css">
  
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js"></script>
   <script src="../packaged/javascript/semantic.js"></script>
+  <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+  <script type='text/javascript' src='md5.js'></script>
   <script src="index.js"></script>
   
   <!-- Sort Tables -->
   <script src="jquery.tablesort.js"></script>
   <script type="text/javascript">
   $(function() {
-
 		var table = $('<table></table>');
 		table.append('<thead><tr><th class="number">Number</th></tr></thead>');
 		var tbody = $('<tbody></tbody>');
@@ -43,7 +45,7 @@
 
 
 </head>
-<body id="home">
+<body id="home" ng-app>
 	
 <div class="ui inverted menu">
   <a class="active item" href="index.html">
@@ -74,7 +76,7 @@
 </div>
 
 
-<div class="ui celled grid">
+<div class="ui celled grid" ng-controller="lyCtrl">
    <div class="row">
    	<div class="one wide column" style="">
    	 </div>
@@ -243,44 +245,10 @@
              <th>總計</th>
            </tr></thead>
            <tbody>
-             <tr>
-               <td>1</td>
-               <td><a href="leg01.html" target="_blank"><img class="ui big avatar image" src="images/01.jpg">呂小章</a></td>
-               <td>6</td>
-               <td>5</td>
-               <td>9</td>
-               <td>1</td>
-               <td>0</td>
-               <td>6</td> 
-               <td>5</td>
-               <td>1</td> 
-               <td>33</td> 
-             </tr>
-             <tr>
-               <td>2</td>
-               <td><img class="ui big avatar image" src="images/02.jpg">王大平</td>
-               <td>3</td>
-               <td>4</td>
-               <td>5</td>
-               <td>2</td>
-               <td>4</td>
-               <td>0</td>
-               <td>0</td>
-               <td>6</td> 
-               <td>24</td> 
-             </tr>
-             <tr>
-               <td>3</td>
-               <td><img class="ui big avatar image" src="images/03.jpg">陳阿明</td>
-               <td>1</td>
-               <td>1</td>
-               <td>3</td>
-               <td>0</td>
-               <td>7</td>
-               <td>2</td> 
-               <td>3</td>
-               <td>2</td> 
-               <td>19</td>
+             <tr ng-repeat="n in legislators">
+               <td>{{n.no}}</td>
+               <td><a href="{{n.page}}" target="_blank"><img class="ui big avatar image" src="{{n.img}}">{{n.name}}</a></td>
+               <td ng-repeat="v in n.committees">{{v.v}}</td>
              </tr>
            </tbody>
         </table>
@@ -302,27 +270,44 @@
              <th>委員會</th>             
            </tr></thead>
            <tbody>
-            <tr>
-               <td><a href="leg01.html" target="_blank"><img class="ui big avatar image" src="images/01.jpg">呂小章</a></td>
-               <td>台北市第一選區</td>
-               <td>中國國民黨</td>
-               <td>經濟</td>           
-             </tr>    
-             <tr>
-              <td><img class="ui big avatar image" src="images/02.jpg">王大平</td>
-               <td>平地原住民</td>
-               <td>親民黨</td>
-               <td>教育文化</td>             
-             </tr>
-             <tr>
-              <td><img class="ui big avatar image" src="images/03.jpg">陳阿明</td>
-               <td>全國不分區</td>
-               <td>民主進步黨</td>
-               <td>內政</td>            
-             </tr>
+            <tr ng-repeat="n in legislators">
+              <td><a href="{{n.page}}" target="_blank"><img class="ui big avatar image" src="{{n.img}}">{{n.name}}</a></td>
+              <td>{{n.section}}</td>
+              <td>{{n.party}}</td>
+              <td>{{n.committee}}</td>
+            </tr>
            </tbody>
         </table> 
-     
+
+        <div class="ui form segment">
+          <div class="four fields">
+            <div class="field">
+              <label>立委名稱</label>
+              <div class="ui left labeled icon input">
+                <input type="text" placeholder="例如: 王小明" ng-model="newLy.name">
+              </div>
+            </div>
+            <div class="field">
+              <label>所屬政黨</label>
+              <div class="ui left labeled icon input">
+                <input type="text" placeholder="例如: 科科黨" ng-model="newLy.party">
+              </div>
+            </div>
+            <div class="field">
+              <label>所屬分區</label>
+              <div class="ui left labeled icon input">
+                <input type="text" placeholder="例如: 全國不分區" ng-model="newLy.section">
+              </div>
+            </div>
+            <div class="field">
+              <label>所屬委員會</label>
+              <div class="ui left labeled icon input">
+                <input type="text" placeholder="例如: 經濟" ng-model="newLy.committee">
+              </div>
+            </div>
+          </div>
+          <div class="ui blue submit button" ng-click="addNewLy()">新增</div>
+        </div>
       </div>
 
       
