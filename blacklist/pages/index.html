@@ -17,8 +17,10 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js"></script>
   <script src="../packaged/javascript/semantic.js"></script>
   <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+  <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
   <script type='text/javascript' src='md5.js'></script>
   <script src="index.js"></script>
+  <script src="admin.js"></script>
   
   <!-- Sort Tables -->
   <script src="jquery.tablesort.js"></script>
@@ -45,7 +47,7 @@
 
 
 </head>
-<body id="home" ng-app>
+<body id="home" ng-app ng-controller="adminCtrl">
 	
 <div class="ui inverted menu">
   <a class="active item" href="index.html">
@@ -62,6 +64,15 @@
   </a>
   
   <div class="right menu">
+    <div class="item" ng-click="loginPanel()" ng-show="!user">
+      登入
+    </div>
+    <div class="item" ng-show="user">
+      {{user.email}}
+    </div>
+    <div class="item" ng-show="user" ng-click="logout()">
+      登出
+    </div>
     <div class="item">
       <div class="ui mini icon input">
         <input type="text" placeholder="Search...">
@@ -77,7 +88,7 @@
 </div>
 
 
-<div class="ui celled grid" ng-controller="lyCtrl">
+<div class="ui celled grid">
    <div class="row">
    	<div class="one wide column" style="">
    	 </div>
@@ -251,7 +262,7 @@
              <th>稅賦</th>
              <th>總計</th>
            </tr></thead>
-           <tbody>
+           <tbody ng-controller="lyCtrl">
              <tr ng-repeat="n in legislators">
                <td>{{n.no}}</td>
                <td><a href="{{n.page}}" target="_blank"><img class="ui big avatar image" src="{{n.img}}">{{n.name}}</a></td>
@@ -265,7 +276,33 @@
   </div>
 </div>
 
-      
+<div class="ui modal" id="login-panel">
+  <i class="close icon"></i>
+  <div class="header">
+    登入
+  </div>
+  <div class="content">
+    <div class="ui form segment">
+       <div class="field">
+          <label>電子郵件</label>
+          <input type="text" placeholder="例如: somebody@somehost.com" ng-model="account">
+       </div>
+       <div class="field">
+          <label>密碼</label>
+          <input type="password" placeholder="" ng-model="password">
+       </div>
+       <div class="field" style="text-align: center">
+         <div class="ui buttons">
+           <div class="ui button" ng-click="login()">登入</div>
+           <div class="or"></div>
+           <div class="ui positive button" ng-click="signup()">註冊</div>
+         </div>
+       </div>
+  </div>
+  <div class="actions">
+    <div class="ui button">取消</div>
+  </div>
+</div>      
 
 	
 
