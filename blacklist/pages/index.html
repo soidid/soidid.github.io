@@ -47,13 +47,16 @@
 	
 <div class="ui inverted menu">
   <a class="active item" href="index.html">
-    <i class="home icon"></i> Home
+    <i class="thumbs down outline icon"></i> The Blacklist
   </a>
-  <a class="item">
-    <i class="user icon"></i> About
+  <a class="item" href="legall.html">
+    立委
   </a>
-  <a class="item">
-    <i class="mail icon"></i> Contact
+  <a class="item" href="eventall.html">
+    事件
+  </a>
+  <a class="item" href="critiall.html">
+    議題關注者
   </a>
   
   <div class="right menu">
@@ -66,10 +69,8 @@
   </div>
   
 </div>
- <h2 class="ui header">
- <i class="thumbs down outline icon"></i>
- The Blacklist</h2>
- <div class="ui primary segment">
+
+ <div class="ui segment">
    <p>收集議題關注者、NGO、NPO 的不推薦名單</p>
 </div>
 
@@ -80,11 +81,16 @@
    	 </div>
     <div class="one wide column" style="">
     	<div class="ui ribbon red label">名單選擇</div>
-    	<div class="ui basic vertical accordion menu">
-         <div class="item">
-         
+ 
+<div class="ui tabular filter menu">
+        <a class="active item" data-tab="black">blacklist</a>
+        <a class="item" data-tab="white">whitelist</a>
+</div>
+<div class="ui divided selection list active tab" data-tab="black">
+	 <div class="active content menu">
+             <div class="ui form item">
                <div class="grouped inline fields">
-                 <div class="field">
+               	<div class="field">
                    <div class="ui checkbox">
                      <input type="checkbox" name="group1">
                      <label>有疑慮</label>
@@ -92,19 +98,29 @@
                  </div>
                  <div class="field">
                    <div class="ui checkbox">
-                     <input type="checkbox" name="group2">
+                     <input type="checkbox" name="group1">
                      <label>不推薦</label>
                    </div>
                  </div>
                  <div class="field">
                    <div class="ui checkbox">
-                     <input type="checkbox" name="group3">
+                     <input type="checkbox" name="group2">
                      <label>強烈反對</label>
                    </div>
                  </div>
-               </div>          
-         </div>        
-      </div>
+               </div>
+              
+             </div>
+           </div>
+</div>
+<div class="ui divided selection list active tab" data-tab="white">
+	 <div class="content menu">
+        <div class="ui form item">
+        	選擇 whitelist，右方將顯示不在黑名單上的立委有哪些。目前顯示範圍：第八屆立委。
+        </div>
+   </div>
+</div>
+
       <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
     	<div class="ui basic vertical accordion menu">
     		 <div class="item">
@@ -217,18 +233,9 @@
     
      
     <div class="ten wide middle column" style="">
-      <div class="ui tabular filter menu">
-        <a class="active item" data-tab="rank">排名</a>
-        <a class="item" data-tab="legislator">立委</a>
-        <a class="item" data-tab="event">事件</a>
-        <a class="item" data-tab="critiquer">議題關注者</a>
-      </div>
-      <div class="ui divided selection list active tab" data-tab="rank">
-      	<a class="item">
+   
           <div class="left floated">立委上榜次數一覽表</div>
-        </a>
-      
-        <table class="ui sortable table segment">
+       <table class="ui sortable table segment">
            <thead>
              <tr><th>No</th>
              <th>立委</th>
@@ -245,7 +252,7 @@
            <tbody>
              <tr>
                <td>1</td>
-               <td><a href="leg01.html" target="_blank"><img class="ui big avatar image" src="images/01.jpg">呂小章</a></td>
+               <td><a href="leg01.html"><img class="ui big avatar image" src="images/01.jpg">呂小章</a></td>
                <td>6</td>
                <td>5</td>
                <td>9</td>
@@ -284,155 +291,7 @@
              </tr>
            </tbody>
         </table>
-        
-        
-
-
-      </div>
-      <div class="ui divided selection list tab" data-tab="legislator">
-      	<a class="item">
-          <div class="left floated">根據選區、姓名等選擇您想進一步了解的立委</div>
-        </a>
-        <table class="ui sortable table segment">
-           <thead>
-             <tr>
-             <th>姓名</th>
-             <th>選區</th>
-             <th>黨籍</th>
-             <th>委員會</th>             
-           </tr></thead>
-           <tbody>
-            <tr>
-               <td><a href="leg01.html" target="_blank"><img class="ui big avatar image" src="images/01.jpg">呂小章</a></td>
-               <td>台北市第一選區</td>
-               <td>中國國民黨</td>
-               <td>經濟</td>           
-             </tr>    
-             <tr>
-              <td><img class="ui big avatar image" src="images/02.jpg">王大平</td>
-               <td>平地原住民</td>
-               <td>親民黨</td>
-               <td>教育文化</td>             
-             </tr>
-             <tr>
-              <td><img class="ui big avatar image" src="images/03.jpg">陳阿明</td>
-               <td>全國不分區</td>
-               <td>民主進步黨</td>
-               <td>內政</td>            
-             </tr>
-           </tbody>
-        </table> 
-     
-      </div>
-
-      
-      <div class="ui divided selection list tab" data-tab="event">
-        <a class="item">
-          <div class="left floated date">瀏覽所有的事件</div>         
-        </a>
-         <table class="ui sortable table segment">
-           <thead>
-             <tr><th>日期</th>
-             <th>分類</th>
-             <th>名單</th>           
-             <th>事件</th>
-             <th>影響</th>
-             <th>來自</th>            
-           </tr></thead>
-           <tbody>
-             <tr>
-               <td>2013-12-11</td>
-               <td><div class="ui purple horizontal label">利益迴避</div></td>
-               <td>強烈反對</td>             
-               <td><a href="event01.html" target="_blank">提出公職人員利益衝突迴避法第九條及第十五條條文修正草案</a></td>
-               <td>放寬相關規範，恐將使利益輸送情況加劇。</td>
-               <td>公督盟</td>
-             </tr>
-             <tr>
-               <td>2013-05-28</td>
-               <td><div class="ui teal horizontal label">教育</div></td>
-               <td>有疑慮</td>              
-               <td>提出高級中等學校建教合作實施及建教生權益保障法部分條文修正草案</td>
-               <td>侵犯建教生權益。</td>
-               <td>台少盟</td>
-             </tr>
-             <tr>
-               <td>2012-09-29</td>
-               <td><div class="ui green horizontal label">環境</div></td>
-               <td>不推薦</td>
-               
-               <td>提出溫泉法第三十一條條文修正草案</td>
-               <td>恐有圖利非法業者之虞，並對脆弱之地質環境造成不良影響，使人民之生命財產遭受威脅。</td>
-               <td>環盟</td>
-             </tr>
-           </tbody>
-        </table>
-        
-      </div>
-      
-      <div class="ui divided selection list tab" data-tab="critiquer">
-        <a class="item">
-          <div class="left floated date">所有議題關注者提出的事件統計</div>
-        </a>
-        <table class="ui sortable table segment">
-           <thead>
-             <tr><th>No</th>
-             <th>議題關注者</th>
-             <th>環保</th>
-             <th>勞工</th>
-             <th>性別</th>
-             <th>司法</th>
-             <th>人權</th>
-             <th>土地</th>
-             <th>教育</th>
-             <th>稅賦</th>
-             <th>總計</th>
-           </tr></thead>
-           <tbody>
-             <tr>
-               <td>1</td>
-               <td>環盟</td>
-               <td>6</td>
-               <td>5</td>
-               <td>9</td>
-               <td>1</td>
-               <td>0</td>
-               <td>6</td> 
-               <td>5</td>
-               <td>1</td> 
-               <td>33</td> 
-             </tr>
-             <tr>
-               <td>2</td>
-               <td>綠盟</td>
-               <td>3</td>
-               <td>4</td>
-               <td>5</td>
-               <td>2</td>
-               <td>4</td>
-               <td>0</td>
-               <td>0</td>
-               <td>6</td> 
-               <td>24</td> 
-             </tr>
-             <tr>
-               <td>3</td>
-               <td><a href="criti01.html" target="_blank">地球公民</td>
-               <td>1</td>
-               <td>1</td>
-               <td>3</td>
-               <td>0</td>
-               <td>7</td>
-               <td>2</td> 
-               <td>3</td>
-               <td>2</td> 
-               <td>19</td>
-             </tr>
-           </tbody>
-        </table>
-      </div>
-      
-    </div>
+    </div>    
     <div class="one wide column" style="">
    	</div>
     
