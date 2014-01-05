@@ -1,0 +1,118 @@
+﻿<div class="ui inverted menu">
+  <a class="item" href="index.html">
+    <i class="thumbs down outline icon"></i> The Blacklist
+  </a>
+  <a class="active item" href="people.html">
+    立委
+  </a>
+  <a class="item" href="eventall.html">
+    事件
+  </a>
+  <a class="item" href="critiall.html">
+    議題關注者
+  </a>
+
+  <div class="right menu">
+    <div class="item">
+      <div class="ui mini icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ui segment">
+  <p>收集議題關注者、NGO、NPO 的不推薦名單</p>
+</div>
+
+<div class="ui celled grid">
+  <div class="row">
+    <div class="two wide column" style="">
+      搜尋：
+      <div class="ui input">
+        <input type="text" ng-model="query">
+      </div>
+      <!--
+      <div class="ui mini dropdown">
+        <div class="text" name="select">選擇篩選條件</div>
+        <input type="hidden" name="select" ng-model="query2">
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item" ng-click="query2=''">顯示所有</div>
+          <div class="item" ng-click="query2='台北市'">天龍國立委</div>
+          <div class="item" ng-click="query2='中國國民黨'">國民黨立委</div>
+          <div class="item" ng-click="query2='經濟'">經濟委員會</div>
+        </div>
+      </div>
+      -->
+    </div>
+    <div class="ten wide middle column" style="">
+
+
+      <div class="left floated">根據選區、姓名等選擇您想進一步了解的立委</div>
+
+      <table class="ui sortable table segment">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>選區</th>
+            <th>範圍</th>
+            <th>黨籍</th>
+            <th>委員會</th>
+        </tr></thead>
+
+        <tbody>
+          <tr ng-repeat="n in legislators | filter:query | filter:query2">
+            <td><a href="#/legislators/{{n.id}}" target="_blank">
+                <img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
+            <td>{{n.eleDistrict}}</td>
+            <td>{{n.districtDetail}}</td>
+            <td>{{n.party}}</td>
+            <td>{{n.committee}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="ui form segment">
+        <div class="four fields">
+          <div class="field">
+            <label>立委名稱</label>
+            <div class="ui left labeled icon input">
+              <input type="text" placeholder="例如: 王小明" ng-model="newLy.name">
+            </div>
+          </div>
+          <div class="field">
+            <label>所屬分區</label>
+            <div class="ui left labeled icon input">
+              <input type="text" placeholder="例如: 全國不分區" ng-model="newLy.section">
+            </div>
+          </div>
+          <div class="field">
+            <label>所屬政黨</label>
+            <div class="ui left labeled icon input">
+              <input type="text" placeholder="例如: 科科黨" ng-model="newLy.party">
+            </div>
+          </div>
+          <div class="field">
+            <label>所屬委員會</label>
+            <div class="ui left labeled icon input">
+              <input type="text" placeholder="例如: 經濟" ng-model="newLy.committee">
+            </div>
+          </div>
+        </div>
+        <div class="ui blue submit button" ng-click="addNewLy()">新增</div>
+      </div>
+    </div>
+  </div>
+  <div class="one wide column" style="">
+  </div>
+
+</div>
+    </div>
+
+
+
+
+

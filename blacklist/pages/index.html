@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
-<head>
+<html ng-app='rankApp'>
+  <head>
   <!-- Standard Meta -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -19,7 +20,8 @@
   <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
   <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
   <script type='text/javascript' src='md5.js'></script>
-  <script src="index.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
   <script src="admin.js"></script>
 
   <!-- Sort Tables -->
@@ -53,7 +55,7 @@
   <a class="active item" href="index.html">
     <i class="thumbs down outline icon"></i> The Blacklist
   </a>
-  <a class="item" href="legall.html">
+  <a class="item" href="people.html">
     立委
   </a>
   <a class="item" href="eventall.html">
@@ -262,10 +264,10 @@
              <th>稅賦</th>
              <th>總計</th>
            </tr></thead>
-           <tbody ng-controller="lyCtrl">
+           <tbody ng-controller="rankCtrl">
              <tr ng-repeat="n in legislators">
                <td>{{($index+1)}}</td>
-               <td><a href="#" target="_blank"><img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
+               <td><a href="people.html#/legislators/{{n.id}}"# target="_blank"><img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
                <!----------------------------->
                <!--
                    <td ng-repeat="v in n.committees">{{v.v}}</td>
