@@ -29,46 +29,78 @@ $(document)
 /*
  * for eventall.html
  */
+function getColor(categoryName){
+  var color ="";
+  switch(categoryName){
+    case '環保': color = 'green';break;
+    case '勞工': color = 'blue';break;
+    case '性別': color = 'red';break;
+    case '司法': color = 'purple';break;
+    case '人權': color = 'black';break;
+    case '土地': color = 'black';break;
+    case '教育': color = 'teal';break;
+    case '稅賦': color = 'orange';break;
+  }
+  return color;
+};
 var eventall={};
-var eventallApp = angular.module('eventallApp',[]);
+var eventControllers = angular.module('eventControllers',[]);
 
-eventallApp.controller('eventallCtrl', function($scope){
+eventControllers.controller('eventListCtrl', function($scope){
+    $('.ui.checkbox')
+      .checkbox()
+    ;
+    $('.ui.accordion')
+      .accordion()
+    ;
+
+
 
   $scope.addEventItem=function($scope, it) {
     console.log(it);
     setTimeout(function(){$scope.$apply(function() {$scope.events.push(it);});}, 0);
   };
 
+
+
   $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/event");
   $scope.dbRef.on("child_added", function(d) {
     v = d.val();
-    console.log(v);
-
+    v.color = getColor(v.category);
     $scope.addEventItem($scope, v);
   });
 
   $scope.events=[];
 });
 
+eventControllers.controller('eventDetailCtrl',['$scope','$routeParams',
+
+    function($scope,$routeParams){
+
+      $scope.event={};
+      $scope.eventId = $routeParams.eventId;
+      console.log($scope.eventId);
+      $scope.eventdbRef = new Firebase("https://blacklist.firebaseIO.com/event");
+
+      $scope.eventdbRef.on("child_added", function(d) {
+        v = d.val();
+        if($scope.eventId==v.id){
+          $scope.event = v;
+                  }
+      });
+   }
+]);
+
 /*
  * for add-event.html
  */
 var addEvent={};
-addEvent.category=[];
+addEvent.categoryChoice="";
 function toggleCategory(){
-  console.log("in toggleSelection");
-  var categoryName = $(this).find("input").attr("name");
-  console.log(categoryName);
-  var idx = addEvent.category.indexOf(categoryName);
-  // is currently selected
-  if (idx > -1) {
-    addEvent.category.splice(idx, 1);
-  }
-  // is newly selected
-  else {
-    addEvent.category.push(categoryName);
-  }
-  console.log(addEvent.category);
+  console.log("in toggleCategory");
+  addEvent.categoryChoice = $(this).find("label").text();
+
+  console.log(addEvent.categoryChoice);
 };
 addEvent.listChoice="";
 function toggleList(){
@@ -109,15 +141,15 @@ addEventApp.controller('addEventCtrl', function($scope){
     {title:'立法院會議記錄',link:'www.filelocation.com/meeting.doc'}
   ]
 
-  //////////////////////////////////////// issue
-  $scope.dataHint = addEvent.testData.slice();
-  $.map($scope.dataHint,function(element){
+  $scope.setDataHint = function(){
+    $scope.dataHint = $.extend(true,[],addEvent.testData);
+
+    $.map($scope.dataHint,function(element){
       element.title = "例如："+element.title;
       element.link = "例如："+element.link;
-  });
-  console.log(addEvent.testData);
-  ///////////////////////////////////////
-
+    });
+  };
+  $scope.setDataHint();
   $scope.getData = function(){
 
     //console.log("in function: getData");
@@ -136,13 +168,20 @@ addEventApp.controller('addEventCtrl', function($scope){
     //console.log(addEvent.dataList);
   };
 
+  $scope.getDate = function(){
+     var d = new Date();
+     var month = d.getMonth()+1;
+     var day = d.getDate();
+     var output = d.getFullYear()+"-"+((''+month).length<2?'0':'')+month+"-"+((''+day).length<2?'0':'')+day;
+     return output;
 
+  }
   $scope.checkInput = function(n){
      console.log("in check input function, current data:");
      console.log(n);
      if(n.name==null){ console.log("請輸入事件名稱"); return false;}
-     if(n.category.length==0){ console.log("請選擇事件類型（至少一項）"); return false;}
-     if(n.listChoice==null){ console.log("請選擇所屬表單（有疑慮/不推薦/強烈反對）"); return false;}
+     if(n.category==null){ console.log("請選擇事件類型"); return false;}
+     if(n.list==null){ console.log("請選擇所屬表單（有疑慮/不推薦/強烈反對）"); return false;}
      if(n.abstract==null){ console.log("請輸入事件摘要"); return false;}
      if(n.people==null){ console.log("請輸入相關人士"); return false;}
      if(n.content==null){ console.log("請輸入事件名稱"); return false;}
@@ -155,12 +194,12 @@ addEventApp.controller('addEventCtrl', function($scope){
   $scope.newEvent={};
 
   $scope.addNewEvent = function(){
-    $scope.newEvent.category = addEvent.category;
+    $scope.newEvent.category = addEvent.categoryChoice;
     if(addEvent.listChoice.length>0)
-      $scope.newEvent.listChoice = addEvent.listChoice;
+      $scope.newEvent.list = addEvent.listChoice;
     $scope.getData();
     $scope.newEvent.data = addEvent.dataList;
-
+    $scope.newEvent.date = $scope.getDate();
     if($scope.checkInput($scope.newEvent)){
       $scope.dbRef.push($scope.newEvent);
       $scope.newEvent = {};
@@ -175,11 +214,10 @@ addEventApp.controller('addEventCtrl', function($scope){
   $scope.fillInTestData = function(){
     console.log("in function: fill in test data");
     $scope.newEvent.name = "公職人員利益衝突迴避法第九條及第十五條條文修正草案";
-    addEvent.category = ["司法"];
+    addEvent.categoryChoice = "司法";
     $(".category").each(function(index,element){
       var current = $(element).find("input");
-      var idx = addEvent.category.indexOf(current.attr("name"));
-      if(idx > -1)
+      if(addEvent.categoryChoice == $(element).find("label").text())
         current.prop("checked",true);
       else current.prop("checked",false);
     });
@@ -204,7 +242,7 @@ $scope.dataList = addEvent.testData.slice();
     console.log("in function: clear data");
     $scope.newEvent = {};
     addEvent.listChoice = "";
-    addEvent.category.length = 0;
+    addEvent.categoryChoice = "";
     $(".category").each(function(index,element){
       $(element).find("input").prop("checked",false);
     });
@@ -213,7 +251,7 @@ $scope.dataList = addEvent.testData.slice();
     });
     $scope.dataList.length = 0;
     $scope.dataHint.length = 0;
-    $scope.dataHint = addEvent.testData.slice();
+    $scope.setDataHint();
   };
 
 });
@@ -229,6 +267,11 @@ function addItem($scope, it) {
 
 var legControllers = angular.module('legControllers',[]);
 legControllers.controller('legListCtrl', function($scope) {
+
+  $('.ui.dropdown')
+  .dropdown()
+  ;
+
   id = 0;
   $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/legislator");
   $scope.dbRef.on("child_added", function(d) {
@@ -257,7 +300,14 @@ legControllers.controller('legListCtrl', function($scope) {
 legControllers.controller('legDetailCtrl',['$scope','$routeParams',
 
     function($scope,$routeParams){
-       $scope.legId = $routeParams.legId;
+      $('.ui.checkbox')
+      .checkbox()
+      ;
+      $('.ui.accordion')
+      .accordion()
+      ;
+
+      $scope.legId = $routeParams.legId;
 
        $scope.legEvents=[];
        //first collect the event related to the legislar
@@ -290,17 +340,18 @@ legControllers.controller('legDetailCtrl',['$scope','$routeParams',
          v = d.val();
          var idx = $scope.legEvents.indexOf(v.id);
          if (idx > -1)
-           {
-             $scope.addEventItem($scope, v);
-             console.log(v);
-           }
+         {
+           v.color = getColor(v.category);
+           $scope.addEventItem($scope, v);
+           console.log(v);
+         }
 
        });
     }
 ]);
 
 /*
- *     for rankApp (display as index.html)    
+ *     for rankApp (display as index.html)
  */
 var rankApp = angular.module('rankApp',[]);
 rankApp.controller('rankCtrl', function($scope){
