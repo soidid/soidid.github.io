@@ -54,7 +54,7 @@
     <a class="item" href="people.html">
       立委
     </a>
-    <a class="active item" href="eventall.html">
+    <a class="active item" href="event.html">
       事件
     </a>
     <a class="item" href="critiall.html">
@@ -115,15 +115,13 @@
             <div class="ui pointing below label">所屬類型</div>
             <div class="ui ten column divided grid">
               <div class="row">
+                <!--ISSUE:should be 'ui checkbox' but semantic ui block the on-click handler.-->
                 <div class="column" ng-repeat="category in categories">
-                  <!--ISSUE:should be 'ui checkbox' but semantic ui block the on-click handler.-->
-                  <div class="ui checkbox category">
+                  <div class="ui radio checkbox category">
                     <input
-                    type="checkbox"
-                    name="{{category}}"
+                    type="radio"
+                    name="category"
                     value="{{category}}"
-                    ng-checked="selection.indexOf(category) > -1"
-                    ng-click="toggleSelection(category)"
                     > <label>{{category}}</label>
                   </div>
                 </div>
