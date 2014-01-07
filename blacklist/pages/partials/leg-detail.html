@@ -196,7 +196,7 @@
         <tbody>
           <tr ng-repeat="n in event">
             <td>{{n.date}}</td>
-            <td>{{n.category}}</td>
+            <td><a class='ui {{n.color}} mini label'>{{n.category}}</td>
             <td>{{n.list}}</td>
             <td><a href=event.html#/list/{{n.id}}>{{n.name}}</a></td>
             <td>{{n.abstract}}</td>
