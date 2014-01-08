@@ -1,29 +1,12 @@
 $(document)
   .ready(function() {
-
-    $('.filter.menu .item')
-      .tab()
-    ;
-
-    $('.ui.accordion')
-      .accordion()
-    ;
-
-    $('.ui.checkbox')
-      .checkbox()
-    ;
-    $('.category')
+  $('.category')
       .on('click',toggleCategory)
     ;
     $('.eventlist')
       .on('click',toggleList)
     ;
-
-    $('.ui.dropdown')
-      .dropdown()
-    ;
-
-  })
+   })
 ;
 
 /*
@@ -43,25 +26,20 @@ function getColor(categoryName){
   }
   return color;
 };
+var legControllers = angular.module('legControllers',[]);
+
 var eventall={};
-var eventControllers = angular.module('eventControllers',[]);
-
-eventControllers.controller('eventListCtrl', function($scope){
-    $('.ui.checkbox')
-      .checkbox()
-    ;
-    $('.ui.accordion')
-      .accordion()
-    ;
-
-
-
+legControllers.controller('eventListCtrl', function($scope){
+  $('.ui.checkbox')
+  .checkbox()
+  ;
+  $('.ui.accordion')
+  .accordion()
+  ;
   $scope.addEventItem=function($scope, it) {
     console.log(it);
     setTimeout(function(){$scope.$apply(function() {$scope.events.push(it);});}, 0);
   };
-
-
 
   $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/event");
   $scope.dbRef.on("child_added", function(d) {
@@ -69,14 +47,11 @@ eventControllers.controller('eventListCtrl', function($scope){
     v.color = getColor(v.category);
     $scope.addEventItem($scope, v);
   });
-
   $scope.events=[];
 });
 
-eventControllers.controller('eventDetailCtrl',['$scope','$routeParams',
-
+legControllers.controller('eventDetailCtrl',['$scope','$routeParams',
     function($scope,$routeParams){
-
       $scope.event={};
       $scope.eventId = $routeParams.eventId;
       console.log($scope.eventId);
@@ -85,8 +60,10 @@ eventControllers.controller('eventDetailCtrl',['$scope','$routeParams',
       $scope.eventdbRef.on("child_added", function(d) {
         v = d.val();
         if($scope.eventId==v.id){
+          v.color = getColor(v.category);
           $scope.event = v;
-                  }
+        console.log($scope.event);
+        }
       });
    }
 ]);
@@ -136,6 +113,14 @@ addEventApp.controller('addEventCtrl', function($scope){
     }
   };
 */
+/*
+  $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/legislator");
+  $scope.dbRef.on("child_added", function(d) {
+    v = d.val();
+    addItem($scope, v);
+  });
+  */$scope.legislators = [{"name":"111"},{"name":"222"}];
+
   addEvent.testData = [
     {title:'公職人員利益衝突回避法修正案', link:'www.filelocation.com/law.pdf'},
     {title:'立法院會議記錄',link:'www.filelocation.com/meeting.doc'}
@@ -265,13 +250,11 @@ function addItem($scope, it) {
   setTimeout(function(){$scope.$apply(function() {$scope.legislators.push(it);});}, 0);
 }
 
-var legControllers = angular.module('legControllers',[]);
 legControllers.controller('legListCtrl', function($scope) {
 
   $('.ui.dropdown')
   .dropdown()
   ;
-
   id = 0;
   $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/legislator");
   $scope.dbRef.on("child_added", function(d) {
@@ -311,13 +294,7 @@ legControllers.controller('legDetailCtrl',['$scope','$routeParams',
 
        $scope.legEvents=[];
        //first collect the event related to the legislar
-       $scope.leg={};
        $scope.legdbRef = new Firebase("https://blacklist.firebaseIO.com/legislator");
-
-       $scope.addLegItem=function($scope, it) {
-         console.log(it);
-         setTimeout(function(){$scope.$apply(function() {$scope.leg.push(it);});}, 0);
-       };
 
        $scope.legdbRef.on("child_added", function(d) {
          v = d.val();
@@ -351,10 +328,23 @@ legControllers.controller('legDetailCtrl',['$scope','$routeParams',
 ]);
 
 /*
- *     for rankApp (display as index.html)
+ *     for rank.html (display as index.html)
  */
-var rankApp = angular.module('rankApp',[]);
-rankApp.controller('rankCtrl', function($scope){
+
+legControllers.controller('rankCtrl',['$scope','$routeParams',
+
+ function($scope,$routeParams){
+  $('.ui.accordion')
+  .accordion()
+  ;
+  $('.ui.checkbox')
+  .checkbox()
+  ;
+
+  $('.ui.dropdown')
+  .dropdown()
+  ;
+
   id = 0;
   $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/legislator");
   $scope.dbRef.on("child_added", function(d) {
@@ -381,7 +371,62 @@ rankApp.controller('rankCtrl', function($scope){
     //{name: "呂小章", img: "01.jpg", page: "leg01.html", no: "1", committees: wrap([6,5,9,1,0,6,5,1,33]), committee: "經濟", party: "中國國民黨", section: "台北市第一選區"},
     //{name: "王大平", img: "02.jpg", page: "leg02.html", no: "2", committees: wrap([3,4,5,2,4,0,0,6,24]), committee: "教育文化", party: "親民黨", section: "平地原住民"},
     //{name: "陳阿明", img: "03.jpg", page: "leg03.html", no: "3", committees: wrap([1,1,3,0,7,2,3,2,19]), committee: "內政", party: "民主進步黨", section: "全國不分區"}
+}]);
+
+/* critiquers */
+
+legControllers.controller('criListCtrl', function($scope) {
+
+  id = 0;
+  $scope.addCriItem=function($scope, it) {
+    //console.log(it);
+    setTimeout(function(){$scope.$apply(function() {$scope.critiquers.push(it);});}, 0);
+  };
+
+  $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/critiquer");
+  $scope.dbRef.on("child_added", function(d) {
+    v = d.val();
+    $scope.addCriItem($scope, v);
+  });
+  $scope.critiquers=[];
 });
 
+
+legControllers.controller('criDetailCtrl',['$scope','$routeParams',
+
+    function($scope,$routeParams){
+       $scope.criId = $routeParams.criId;
+
+       $scope.criEvents=[];
+       //first collect the event related to the critiquer
+       $scope.cridbRef = new Firebase("https://blacklist.firebaseIO.com/critiquer");
+       $scope.cridbRef.on("child_added", function(d) {
+         v = d.val();
+         if(v.id==$scope.criId){
+           $scope.cri = v;
+           $scope.criEvents = v.event;
+         }
+       });
+
+       $scope.event=[];
+       //then collect the event list
+       $scope.eventdbRef = new Firebase("https://blacklist.firebaseIO.com/event");
+       $scope.addEventItem=function($scope, it) {
+         //console.log(it);
+         setTimeout(function(){$scope.$apply(function() {$scope.event.push(it);});}, 0);
+       };
+
+       $scope.eventdbRef.on("child_added", function(d) {
+         v = d.val();
+         var idx = $scope.criEvents.indexOf(v.id);
+         if (idx > -1)
+         {
+           v.color = getColor(v.category);
+           $scope.addEventItem($scope, v);
+         }
+
+       });
+    }
+]);
 
 

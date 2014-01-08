@@ -8,6 +8,14 @@ var legApp = angular.module("legApp", [
 legApp.config(['$routeProvider',
   function($routeProvider){
     $routeProvider.
+      when('/rank',{
+      templateUrl: 'partials/rank.html',
+      controller: 'rankCtrl'
+    }).
+      when('/rank/white',{
+      templateUrl: 'partials/rank-white.html',
+      controller: 'rankCtrl'
+    }).
       when('/legislators',{
       templateUrl: 'partials/leg-list.html',
       controller: 'legListCtrl'
@@ -16,32 +24,26 @@ legApp.config(['$routeProvider',
       templateUrl: 'partials/leg-detail.html',
       controller: 'legDetailCtrl'
     }).
-      otherwise({
-      redirectTo:'/legislators'
-
-    });
-
-  }]);
-
-var eventApp = angular.module("eventApp", [
-  'ngRoute',
-  'eventControllers'
-]);
-
-eventApp.config(['$routeProvider',
-  function($routeProvider){
-    $routeProvider.
-      when('/list',{
-      templateUrl: 'partials/event-list.html',
-      controller: 'eventListCtrl'
-    }).
-      when('/list/:eventId',{
+      when('/event/:eventId',{
       templateUrl: 'partials/event-detail.html',
       controller: 'eventDetailCtrl'
     }).
+      when('/events',{
+      templateUrl: 'partials/event-list.html',
+      controller: 'eventListCtrl'
+    }).
+      when('/critiquers',{
+      templateUrl: 'partials/cri-list.html',
+      controller: 'criListCtrl'
+    }).
+      when('/critiquers/:criId',{
+      templateUrl: 'partials/cri-detail.html',
+      controller: 'criDetailCtrl'
+    }).
       otherwise({
-      redirectTo:'/list'
-
+      redirectTo:'/rank'
     });
 
   }]);
+
+

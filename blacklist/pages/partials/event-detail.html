@@ -3,13 +3,13 @@
   <a class="item" href="index.html">
     <i class="thumbs down outline icon"></i> The Blacklist
   </a>
-  <a class="item" href="people.html">
+  <a class="item" href="#/legislators">
     立委
   </a>
-  <a class="active item" href="event.html">
+  <a class="active item" href="#/events">
     事件
   </a>
-  <a class="item" href="critiall.html">
+  <a class="item" href="#/critiquers">
     議題關注者
   </a>
 
@@ -40,7 +40,7 @@
 
        	<div><h2 class="ui info">
             {{event.name}}
-            <div class="ui top right attached purple label">{{event.category}}</div></h2>
+            <div class="ui top right attached {{event.color}} label">{{event.category}}</div></h2>
         </div>
 
         <div class="ui secondary segment">
@@ -56,8 +56,6 @@
          <h3 class="ui dividing header">完整說明</h3>
          <p>{{event.content}}</p>
          <h3 class="ui dividing header">喊冤專區</h3>
-         <p>表示一切都是為了司法正義、比例原則、工作權還有財產權的維護。正義的使者。</p>
-
 
          <h3 class="ui dividing header">原始資料</h3>
 

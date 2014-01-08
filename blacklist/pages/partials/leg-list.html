@@ -1,14 +1,17 @@
-﻿<div class="ui inverted menu">
+﻿
+
+
+<div class="ui inverted menu">
   <a class="item" href="index.html">
     <i class="thumbs down outline icon"></i> The Blacklist
   </a>
-  <a class="active item" href="people.html">
+  <a class="active item" href="#/legislators">
     立委
   </a>
-  <a class="item" href="event.html">
+  <a class="item" href="#/events">
     事件
   </a>
-  <a class="item" href="critiall.html">
+  <a class="item" href="#/critiquers">
     議題關注者
   </a>
 
@@ -50,7 +53,25 @@
 
 
       <div class="left floated">根據選區、姓名等選擇您想進一步了解的立委</div>
+<script type="text/javascript">
+  $(function() {
+    var table = $('<table></table>');
+    table.append('<thead><tr><th class="number">Number</th></tr></thead>');
+    var tbody = $('<tbody></tbody>');
+    for(var i = 0; i<100; i++) {
+      tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
+    }
+    table.append(tbody);
+    $('.example.ex-2').append(table);
 
+    $('table').tablesort().data('tablesort');
+
+    $('thead th.number').data('sortBy', function(th, td, sorter) {
+      return parseInt(td.text(), 10);
+    });
+
+  });
+  </script>
       <table class="ui sortable table segment">
         <thead>
           <tr>
@@ -63,7 +84,7 @@
 
         <tbody>
           <tr ng-repeat="n in legislators | filter:query | filter:query2">
-            <td><a href="#/legislators/{{n.id}}" target="_blank">
+            <td><a href="#/legislators/{{n.id}}">
                 <img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
             <td>{{n.eleDistrict}}</td>
             <td>{{n.districtDetail}}</td>

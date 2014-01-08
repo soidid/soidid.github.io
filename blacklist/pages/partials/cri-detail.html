@@ -1,0 +1,91 @@
+﻿<div class="ui inverted menu">
+  <a class="item" href="index.html">
+    <i class="thumbs down outline icon"></i> The Blacklist
+  </a>
+  <a class="item" href="#/legislators">
+    立委
+  </a>
+  <a class="item" href="#/events">
+    事件
+  </a>
+  <a class="active item" href="#/critiquers">
+    議題關注者
+  </a>
+
+  <div class="right menu">
+    <div class="item">
+      <div class="ui mini icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ui segment">
+  <p>收集議題關注者、NGO、NPO 的不推薦名單</p>
+</div>
+
+
+<div class="ui celled grid">
+  <div class="row">
+    <div class="one wide column" style="">
+    </div>
+
+    <div class="eleven wide middle column" style="">
+      <div><h2 class="ui info">
+          <img class="ui big avatar image" src={{cri.logo}}>{{cri.name}}</h2>
+        <p>{{cri.info}}</p></div>
+      <div class = "ui horizontal bulleted list">
+        <div class="item"><a href={{cri.website}} target="_blank">官方網站</a></div>
+        <div class="item"><a href={{cri.fb}} target="_blank">facebook</a></div>
+      </div>
+      <h3 class="ui dividing header">事件列表</h3>
+
+      <table class="ui sortable table segment">
+        <!-- Sort Tables -->
+        <script type="text/javascript">
+          $(function() {
+              var table = $('<table></table>');
+              table.append('<thead><tr><th class="number">Number</th></tr></thead>');
+              var tbody = $('<tbody></tbody>');
+              for(var i = 0; i<100; i++) {
+                tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
+              }
+              table.append(tbody);
+              $('.example.ex-2').append(table);
+              $('table').tablesort().data('tablesort');
+              $('thead th.number').data('sortBy', function(th, td, sorter) {
+                return parseInt(td.text(), 10);
+                });
+
+              });
+            </script>
+            <thead>
+       <tr><th>日期</th>
+           <th>分類</th>
+           <th>名單</th>
+           <th>事件</th>
+           <th>影響</th>
+           <th>相關人士</th>
+       </tr></thead>
+        <tbody>
+          <tr ng-repeat="n in event">
+            <td>{{n.date}}</td>
+            <td><a class='ui {{n.color}} mini label'>{{n.category}}</td>
+            <td>{{n.list}}</td>
+            <td><a href=#/event/{{n.id}}>{{n.name}}</a></td>
+            <td>{{n.abstract}}</td>
+            <td>{{n.people}}</td>
+          </tr>
+        </tbody>
+      </table>
+       </div>
+     </div>
+     <div class="one wide column" style="">
+     </div>
+
+   </div>
+ </div>
+

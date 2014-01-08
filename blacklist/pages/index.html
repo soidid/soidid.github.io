@@ -1,315 +1,51 @@
-﻿<!DOCTYPE html>
-<html ng-app='rankApp'>
+<!DOCTYPE html>
+<html ng-app="legApp">
   <head>
-  <!-- Standard Meta -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <!-- Site Properities -->
-  <title>Blacklist</title>
+    <!-- Site Properities -->
+    <title>Blacklist</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="../packaged/css/semantic.css">
-  <link rel="stylesheet" type="text/css" href="index.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../packaged/css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js"></script>
-  <script src="../packaged/javascript/semantic.js"></script>
-  <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
-  <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
-  <script type='text/javascript' src='md5.js'></script>
-  <script src="js/app.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="admin.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular-route.js"></script>
+    <script src="../packaged/javascript/semantic.js"></script>
+    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <script type='text/javascript' src='js/md5.js'></script>
+    <script type='text/javascript' src="js/app.js"></script>
+    <script type='text/javascript' src="js/controllers.js"></script>
 
-  <!-- Sort Tables -->
-  <script src="jquery.tablesort.js"></script>
-  <script type="text/javascript">
-  $(function() {
-		var table = $('<table></table>');
-		table.append('<thead><tr><th class="number">Number</th></tr></thead>');
-		var tbody = $('<tbody></tbody>');
-		for(var i = 0; i<100; i++) {
-			tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
-		}
-		table.append(tbody);
-		$('.example.ex-2').append(table);
+    <!-- Sort Tables -->
+    <script src="js/jquery.tablesort.js"></script>
+    <script type="text/javascript">
+      $(function() {
 
-		$('table').tablesort().data('tablesort');
+          var table = $('<table></table>');
+          table.append('<thead><tr><th class="number">Number</th></tr></thead>');
+          var tbody = $('<tbody></tbody>');
+          for(var i = 0; i<100; i++) {
+          tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
+          }
+          table.append(tbody);
+          $('.example.ex-2').append(table);
 
-		$('thead th.number').data('sortBy', function(th, td, sorter) {
-			return parseInt(td.text(), 10);
-		});
+          $('table').tablesort().data('tablesort');
 
-	});
-  </script>
+          $('thead th.number').data('sortBy', function(th, td, sorter) {
+            return parseInt(td.text(), 10);
+            });
 
-
-
+          });
+</script>
 </head>
-<body id="home" ng-app ng-controller="adminCtrl">
-
-<div class="ui inverted menu">
-  <a class="active item" href="index.html">
-    <i class="thumbs down outline icon"></i> The Blacklist
-  </a>
-  <a class="item" href="people.html">
-    立委
-  </a>
-  <a class="item" href="event.html">
-    事件
-  </a>
-  <a class="item" href="critiall.html">
-    議題關注者
-  </a>
-
-  <div class="right menu">
-    <div class="item" ng-click="loginPanel()" ng-show="!user">
-      登入
-    </div>
-    <div class="item" ng-show="user">
-      {{user.email}}
-    </div>
-    <div class="item" ng-show="user" ng-click="logout()">
-      登出
-    </div>
-    <div class="item">
-      <div class="ui mini icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
-    </div>
-  </div>
-
-</div>
-
- <div class="ui segment">
-   <p>收集議題關注者、NGO、NPO 的不推薦名單</p>
-</div>
-
-
-<div class="ui celled grid">
-   <div class="row">
-   	<div class="one wide column" style="">
-   	 </div>
-    <div class="one wide column" style="">
-    	<div class="ui ribbon red label">名單選擇</div>
-
-<div class="ui tabular filter menu">
-        <a class="active item" data-tab="black">blacklist</a>
-        <a class="item" data-tab="white">whitelist</a>
-</div>
-<div class="ui divided selection list active tab" data-tab="black">
-	 <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-               	<div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>有疑慮</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>不推薦</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group2">
-                     <label>強烈反對</label>
-                   </div>
-                 </div>
-               </div>
-
-             </div>
-           </div>
-</div>
-<div class="ui divided selection list active tab" data-tab="white">
-	 <div class="content menu">
-        <div class="ui form item">
-        	選擇 whitelist，右方將顯示不在黑名單上的立委有哪些。目前顯示範圍：第八屆立委。
-        </div>
-   </div>
-</div>
-
-      <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
-    	<div class="ui basic vertical accordion menu">
-    		 <div class="item">
-    		  <a class="active title">
-              <div class="ui checkbox">
-              <input type="checkbox" name="small">
-              <label>所有</label>
-              </div>
-          </a>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-              環保
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-               	<div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>所有</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>綠盟</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group2">
-                     <label>地球公民</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group3">
-                     <label>環盟</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group4">
-                     <label>主婦聯盟</label>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-             土地
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>農陣</label>
-                   </div>
-                 </div>
-
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-             性別
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>所有</label>
-                   </div>
-                    <div class="field">
-                     <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>婦女新知</label>
-                     </div>
-                   </div>
-                   <div class="field">
-                     <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>台女連</label>
-                     </div>
-                   </div>
-                 </div>
-
-               </div>
-
-             </div>
-           </div>
-         </div>
-
-      </div>
-
-         <a class="ui mini red button">看結果</a>
-
-    </div>
-
-
-    <div class="ten wide middle column" style="">
-
-          <div class="left floated">立委上榜次數一覽表</div>
-       <table class="ui sortable table segment">
-           <thead>
-             <tr><th>No</th>
-             <th>立委</th>
-             <th>環保</th>
-             <th>勞工</th>
-             <th>性別</th>
-             <th>司法</th>
-             <th>人權</th>
-             <th>土地</th>
-             <th>教育</th>
-             <th>稅賦</th>
-             <th>總計</th>
-           </tr></thead>
-           <tbody ng-controller="rankCtrl">
-             <tr ng-repeat="n in legislators">
-               <td>{{($index+1)}}</td>
-               <td><a href="people.html#/legislators/{{n.id}}"# target="_blank"><img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
-               <!----------------------------->
-               <!--
-                   <td ng-repeat="v in n.committees">{{v.v}}</td>
-                   -->
-             </tr>
-           </tbody>
-        </table>
-    <div class="one wide column" style="">
-   	</div>
-
-  </div>
-</div>
-
-<div class="ui modal" id="login-panel">
-  <i class="close icon"></i>
-  <div class="header">
-    登入
-  </div>
-  <div class="content">
-    <div class="ui form segment">
-       <div class="field">
-          <label>電子郵件</label>
-          <input type="text" placeholder="例如: somebody@somehost.com" ng-model="account">
-       </div>
-       <div class="field">
-          <label>密碼</label>
-          <input type="password" placeholder="" ng-model="password">
-       </div>
-       <div class="field" style="text-align: center">
-         <div class="ui buttons">
-           <div class="ui button" ng-click="login()">登入</div>
-           <div class="or"></div>
-           <div class="ui positive button" ng-click="signup()">註冊</div>
-         </div>
-       </div>
-  </div>
-  <div class="actions">
-    <div class="ui button">取消</div>
-  </div>
-</div>
-
-
-
+<body><div ng-view></div>
 </body>
 </html>
