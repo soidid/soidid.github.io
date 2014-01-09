@@ -32,154 +32,77 @@
   <div class="row">
     <div class="one wide column" style="">
     </div>
-    <div class="one wide column" style="">
-      <div class="ui ribbon red label">名單選擇</div>
+  <div class="one wide column" style="">
+    	<div class="ui ribbon red label">名單選擇</div>
 
-      <div class="ui tabular filter menu">
+<div class="ui tabular filter menu">
         <a class="active item" data-tab="black">blacklist</a>
 
-      </div>
-      <div class="ui divided selection list active tab" data-tab="black">
-        <div class="active content menu">
-          <div class="ui form item">
-            <div class="grouped inline fields">
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" name="group1">
-                  <label>有疑慮</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" name="group1">
-                  <label>不推薦</label>
-                </div>
-              </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" name="group2">
-                  <label>強烈反對</label>
-                </div>
-              </div>
-            </div>
-
+</div>
+<div class="ui divided selection list active tab" data-tab="black">
+  <div class="active content menu">
+    <div class="ui form item">
+      <div class="grouped inline fields">
+        <div class="field">
+          <div class="ui checkbox listFilter">
+            <input type="checkbox" checked="true" value="有疑慮">
+            <label>有疑慮</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui checkbox listFilter">
+            <input type="checkbox" checked="true" value="不推薦">
+            <label>不推薦</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui checkbox listFilter">
+            <input type="checkbox" checked="true" value="強烈反對">
+            <label>強烈反對</label>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
 
-      <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
-      <div class="ui basic vertical accordion menu">
-        <div class="item">
-          <a class="active title">
-            <div class="ui checkbox">
-              <input type="checkbox" name="small">
-              <label>所有</label>
-            </div>
-          </a>
-        </div>
-        <div class="item">
-          <a class="active title">
-            <i class="dropdown icon"></i>
-            環保
-          </a>
-          <div class="active content menu">
-            <div class="ui form item">
-              <div class="grouped inline fields">
-                <div class="field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="group1">
-                    <label>所有</label>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="group1">
-                    <label>綠盟</label>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="group2">
-                    <label>地球公民</label>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="group3">
-                    <label>環盟</label>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="group4">
-                    <label>主婦聯盟</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <a class="active title">
-            <i class="dropdown icon"></i>
-            土地
-          </a>
-          <div class="active content menu">
-            <div class="ui form item">
-              <div class="grouped inline fields">
-                <div class="field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="small">
-                    <label>農陣</label>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <a class="active title">
-            <i class="dropdown icon"></i>
-            性別
-          </a>
-          <div class="active content menu">
-            <div class="ui form item">
-              <div class="grouped inline fields">
-                <div class="field">
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="small">
-                    <label>所有</label>
-                  </div>
-                  <div class="field">
-                    <div class="ui checkbox">
-                      <input type="checkbox" name="small">
-                      <label>婦女新知</label>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <div class="ui checkbox">
-                      <input type="checkbox" name="small">
-                      <label>台女連</label>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
+<div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
+<div class="ui basic vertical accordion menu">
+  <div class="item">
+    <a class="active title">
+      <div class="ui checkbox critiquerAllFilter">
+        <input type="checkbox" checked="ture">
+        <label>所有</label>
       </div>
+    </a>
+  </div>
 
-      <a class="ui mini red button">看結果</a>
+  <div class="item" ng-repeat="group in ngoList">
+    <a class="active title">
+      <i class="dropdown icon"></i>
+      {{group.groupName}}
+    </a>
 
+    <div class="active content menu">
+      <div class="ui form item">
+        <div class="grouped inline fields" ng-repeat="ngo in group.groupMember">
+          <div class="field">
+            <div class="ui checkbox critiquerFilter">
+              <input type="checkbox" checked="true" name={{ngo}} value="{{ngo}}">
+              <label>{{ngo}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
+  </div>
+  </div>
+  </div>
+  </div>
 
-    <div class="ten wide middle column" style="">
+     <div class="ten wide middle column" style="">
 
       <div><h2 class="ui info">
           <img class="ui big avatar image" src={{leg.avatar}}>{{leg.name}}</h2>
@@ -194,7 +117,7 @@
             <th>來自</th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="n in event">
+          <tr ng-repeat="n in events | filter:listFilter | filter:critiquerFilter">
             <td>{{n.date}}</td>
             <td><a class='ui {{n.color}} mini label'>{{n.category}}</td>
             <td>{{n.list}}</td>
