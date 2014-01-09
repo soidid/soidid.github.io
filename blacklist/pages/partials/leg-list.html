@@ -85,7 +85,7 @@
         <tbody>
           <tr ng-repeat="n in legislators | filter:query | filter:query2">
             <td><a href="#/legislators/{{n.id}}">
-                <img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
+                <img class="ui big avatar image" ng-src="{{n.avatar}}">{{n.name}}</a></td>
             <td>{{n.eleDistrict}}</td>
             <td>{{n.districtDetail}}</td>
             <td>{{n.party}}</td>

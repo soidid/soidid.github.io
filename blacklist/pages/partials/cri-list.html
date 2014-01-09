@@ -76,7 +76,7 @@
            <tbody>
              <tr ng-repeat="n in critiquers">
                <td>{{($index+1)}}</td>
-               <td><a href="#/critiquers/{{n.id}}"><img class="ui big avatar image" src="{{n.logo}}">{{n.name}}</a></td>
+               <td><a href="#/critiquers/{{n.id}}"><img class="ui big avatar image" ng-src="{{n.logo}}">{{n.name}}</a></td>
                <td>{{n.listSum.environment}}</td>
                <td>{{n.listSum.labor}}</td>
                <td>{{n.listSum.gender}}</td>

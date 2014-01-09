@@ -5,8 +5,8 @@ var legApp = angular.module("legApp", [
   'legControllers'
 ]);
 
-legApp.config(['$routeProvider',
-  function($routeProvider){
+legApp.config(['$routeProvider','$locationProvider',
+  function($routeProvider,$locationProvider){
     $routeProvider.
       when('/rank',{
       templateUrl: 'partials/rank.html',
@@ -43,7 +43,7 @@ legApp.config(['$routeProvider',
       otherwise({
       redirectTo:'/rank'
     });
-
+    //$locationProvider.html5Mode(true);
   }]);
 
 
