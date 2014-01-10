@@ -2,6 +2,84 @@
 legControllers.controller('legDetailCtrl',['$scope','$routeParams',
 
 function($scope,$routeParams){
+/////// Top Menu //////////////
+
+
+   $scope.categoryPrechoice = $routeParams.category;
+
+
+// Category Button
+    $scope.categories = [];
+    $.each(legApp.categories, function(index,element){
+      $scope.categories.push({"name":element,"color":getColor(element)});
+    });
+
+    if($scope.categoryPrechoice == null)
+      $scope.categoryFilter = "";
+    else
+      $scope.categoryFilter = $scope.categoryPrechoice;
+
+
+ $scope.menuReady = function() {
+
+   // Set active category
+   if($scope.categoryPrechoice != null){
+     $(".categoryMenu").each(function(index,element){
+       var current = $(element).attr("value");
+       if(current === $scope.categoryPrechoice)
+         $(element).addClass('active');
+       else
+         $(element).removeClass('active');
+     });
+   }
+
+
+   // selector cache
+  var
+    $menuItem = $('.menu a.item, .menu .link.item'),
+    $dropdown = $('.main.container .menu .dropdown'),
+    // alias
+    handler = {
+
+      activate: function() {
+        if(!$(this).hasClass('dropdown')) {
+          $(this)
+            .addClass('active')
+            .closest('.ui.menu')
+            .find('.item')
+              .not($(this))
+              .removeClass('active')
+          ;
+          $scope.categoryFilter = $(this).attr("value");
+          $scope.$apply();//refresh the page
+        }
+      }
+    }
+  ;
+
+  $dropdown
+    .dropdown({
+      on: 'hover'
+    })
+  ;
+
+  $menuItem
+    .on('click', handler.activate)
+  ;
+
+};
+$scope.topMenuFilter = function(n){
+  if($scope.categoryFilter ==""){
+    return n;
+  }else{
+    if(n.category === $scope.categoryFilter)
+      return n;
+  }
+};
+
+
+
+
 ////// Left Menu Start////////////
 
 
@@ -93,15 +171,17 @@ function($scope,$routeParams){
 
   //ISSUE
  //This is bad..... After the checkbox has been render, have to call semantic UI
- $scope.flag = 0;
+ $scope.flag = true;
  $scope.$watch(function(){
    return document.body.innerHTML
  }, function(val){
-   $scope.flag++;
-   if($scope.flag==$scope.critiquerSum){
+
+   if($scope.flag && ($(".critiquerFilter").length===$scope.critiquerSum)){
      $('.ui.accordion').accordion();
      $('.ui.checkbox').checkbox();
      $('.critiquerFilter').on('click',$scope.toggleCritiquer);
+     $scope.menuReady();//TOP MENU
+     $scope.flag = false;
    }
  });
 
@@ -146,7 +226,7 @@ function($scope,$routeParams){
          {
            v.color = getColor(v.category);
            $scope.addEventItem($scope, v);
-           console.log(v);
+           //console.log(v);
          }
 
        });

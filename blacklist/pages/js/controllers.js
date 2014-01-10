@@ -1,14 +1,26 @@
 $(document)
   .ready(function() {
-  $('.category')
-      .on('click',toggleCategory)
+    $('.ui.checkbox').checkbox();
+
+    $('.category')
+    .on('click',toggleCategory)
     ;
     $('.eventlist')
-      .on('click',toggleList)
+    .on('click',toggleList)
     ;
 
    })
 ;
+//Global Variables
+var legApp={};
+legApp.categories = ['環保', '性別', '勞工', '司法','人權','土地','教育','稅賦'];
+legApp.lists =['有疑慮','不推薦','強烈反對'];
+
+
+
+
+/*----------------------------------------------------------*/
+
 
 var legControllers = angular.module('legControllers',[]);
 
@@ -53,10 +65,10 @@ var addEventApp = angular.module('addEventApp',[]);
 addEventApp.controller('addEventCtrl', function($scope){
 
   // categories
-  $scope.categories = ['環保', '性別', '勞工', '司法','人權','土地','教育','稅賦'];
+  $scope.categories = legApp.categories;
 
   // list choices
-  $scope.lists =['有疑慮','不推薦','強烈反對'];
+  $scope.lists = legApp.lists;
   // selected category
   $scope.selection = [];
 /* will be override if not eliminate the "ui" class on the checkboxes
@@ -81,7 +93,7 @@ addEventApp.controller('addEventCtrl', function($scope){
     v = d.val();
     addItem($scope, v);
   });
-  */$scope.legislators = [{"name":"111"},{"name":"222"}];
+  */$scope.legislators = [];
 
   addEvent.testData = [
     {title:'公職人員利益衝突回避法修正案', link:'www.filelocation.com/law.pdf'},
@@ -304,43 +316,5 @@ legControllers.controller('criListCtrl', function($scope) {
   });
   $scope.critiquers=[];
 });
-
-
-legControllers.controller('criDetailCtrl',['$scope','$routeParams',
-
-    function($scope,$routeParams){
-       $scope.criId = $routeParams.criId;
-
-       $scope.criEvents=[];
-       //first collect the event related to the critiquer
-       $scope.cridbRef = new Firebase("https://blacklist.firebaseIO.com/critiquer");
-       $scope.cridbRef.on("child_added", function(d) {
-         v = d.val();
-         if(v.id==$scope.criId){
-           $scope.cri = v;
-           $scope.criEvents = v.event;
-         }
-       });
-
-       $scope.event=[];
-       //then collect the event list
-       $scope.eventdbRef = new Firebase("https://blacklist.firebaseIO.com/event");
-       $scope.addEventItem=function($scope, it) {
-         //console.log(it);
-         setTimeout(function(){$scope.$apply(function() {$scope.event.push(it);});}, 0);
-       };
-
-       $scope.eventdbRef.on("child_added", function(d) {
-         v = d.val();
-         var idx = $scope.criEvents.indexOf(v.id);
-         if (idx > -1)
-         {
-           v.color = getColor(v.category);
-           $scope.addEventItem($scope, v);
-         }
-
-       });
-    }
-]);
 
 

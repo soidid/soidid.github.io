@@ -24,6 +24,10 @@ legApp.config(['$routeProvider','$locationProvider',
       templateUrl: 'partials/leg-detail.html',
       controller: 'legDetailCtrl'
     }).
+      when('/legislators/:legId/:category',{
+      templateUrl: 'partials/leg-detail.html',
+      controller: 'legDetailCtrl'
+    }).
       when('/event/:eventId',{
       templateUrl: 'partials/event-detail.html',
       controller: 'eventDetailCtrl'
@@ -37,6 +41,10 @@ legApp.config(['$routeProvider','$locationProvider',
       controller: 'criListCtrl'
     }).
       when('/critiquers/:criId',{
+      templateUrl: 'partials/cri-detail.html',
+      controller: 'criDetailCtrl'
+    }).
+      when('/critiquers/:criId/:category',{
       templateUrl: 'partials/cri-detail.html',
       controller: 'criDetailCtrl'
     }).

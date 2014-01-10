@@ -102,8 +102,14 @@
   </div>
   </div>
 
-    <div class="ten wide middle column" style="">
+
+<div class="ten wide middle column" style="">
       <div class="left floated date">瀏覽所有的事件</div>
+      <div class="ui menu">
+        <a class="active gray item" value="">All</a>
+        <a class="{{item.color}} item" ng-repeat="item in categories" value={{item.name}}>{{item.name}}</a>
+      </div>
+
 
   <script type="text/javascript">
   $(function() {
@@ -134,7 +140,7 @@
             <th>來自</th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="n in events | filter:listFilter | filter:critiquerFilter">
+          <tr ng-repeat="n in events | filter:listFilter | filter:critiquerFilter | filter:topMenuFilter" >
             <td>{{n.date}}</td>
             <td><a class='ui {{n.color}} mini label'>{{n.category}}</a></td>
             <td>{{n.list}}</td>

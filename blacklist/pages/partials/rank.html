@@ -227,16 +227,16 @@
            <tbody >
              <tr ng-repeat="n in legislators">
                <td>{{($index+1)}}</td>
-               <td><a href="#/legislators/{{n.id}}"><img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
-               <td>{{n.listSum.environment}}</td>
-               <td>{{n.listSum.labor}}</td>
-               <td>{{n.listSum.gender}}</td>
-               <td>{{n.listSum.judicial}}</td>
-               <td>{{n.listSum.humanrights}}</td>
-               <td>{{n.listSum.land}}</td>
-               <td>{{n.listSum.education}}</td>
-               <td>{{n.listSum.tax}}</td>
-               <td>{{n.listSum.sum}}</td>
+               <td><a href="#/legislators/{{n.id}}"><img class="ui big avatar image" ng-src="{{n.avatar}}">{{n.name}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/環保">{{n.listSum.environment}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/勞工">{{n.listSum.labor}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/性別">{{n.listSum.gender}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/司法">{{n.listSum.judicial}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/人權">{{n.listSum.humanrights}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/土地">{{n.listSum.land}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/教育">{{n.listSum.education}}</a></td>
+               <td><a href="#/legislators/{{n.id}}/稅賦">{{n.listSum.tax}}</a></td>
+                 <td><a href="#/legislators/{{n.id}}">{{n.listSum.sum}}</a></td>
              </tr>
            </tbody>
         </table>

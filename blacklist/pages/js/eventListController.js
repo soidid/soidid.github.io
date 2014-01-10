@@ -16,6 +16,62 @@ function getColor(categoryName){
 legControllers.controller('eventListCtrl', function($scope){
 
 
+/////// Top Menu //////////////
+
+// Category Button
+    $scope.categories = [];
+    $.each(legApp.categories, function(index,element){
+      $scope.categories.push({"name":element,"color":getColor(element)});
+    });
+
+$scope.categoryFilter = "";
+$scope.menuReady = function() {
+
+  // selector cache
+  var
+    $menuItem = $('.menu a.item, .menu .link.item'),
+    $dropdown = $('.main.container .menu .dropdown'),
+    // alias
+    handler = {
+
+      activate: function() {
+        if(!$(this).hasClass('dropdown')) {
+          $(this)
+            .addClass('active')
+            .closest('.ui.menu')
+            .find('.item')
+              .not($(this))
+              .removeClass('active')
+          ;
+          $scope.categoryFilter = $(this).attr("value");
+          $scope.$apply();//refresh the page
+        }
+      }
+    }
+  ;
+
+  $dropdown
+    .dropdown({
+      on: 'hover'
+    })
+  ;
+
+  $menuItem
+    .on('click', handler.activate)
+  ;
+
+};
+$scope.topMenuFilter = function(n){
+  if($scope.categoryFilter ==""){
+    return n;
+  }else{
+    if(n.category === $scope.categoryFilter)
+      return n;
+  }
+};
+
+
+
 ////// Left Menu Start////////////
 
 
@@ -106,18 +162,21 @@ legControllers.controller('eventListCtrl', function($scope){
 
 
   //ISSUE
- //This is bad..... After the checkbox has been render, have to call semantic UI
- $scope.flag = 0;
- $scope.$watch(function(){
-   return document.body.innerHTML
- }, function(val){
-   $scope.flag++;
-   if($scope.flag==$scope.critiquerSum){
-     $('.ui.accordion').accordion();
-     $('.ui.checkbox').checkbox();
-     $('.critiquerFilter').on('click',$scope.toggleCritiquer);
-   }
- });
+  //This is bad..... After the checkbox has been render, have to call semantic UI
+  $scope.flag = true;
+  $scope.$watch(function(){
+    return document.body.innerHTML
+  }, function(val){
+
+    if($scope.flag && ($(".critiquerFilter").length===$scope.critiquerSum)){
+      $('.ui.accordion').accordion();
+      $('.ui.checkbox').checkbox();
+      $('.critiquerFilter').on('click',$scope.toggleCritiquer);
+      $scope.menuReady();//TOP MENU
+      $scope.flag = false;
+    }
+  });
+
 
   //Critiquer filter
   $scope.critiquerFilter = function(n){
@@ -128,6 +187,11 @@ legControllers.controller('eventListCtrl', function($scope){
   };
 
 // Left Menu End ////////////////////////////////////////////////////////
+
+
+
+
+
 
   $scope.addEventItem=function($scope, it) {
     setTimeout(function(){$scope.$apply(function() {$scope.events.push(it);});}, 0);

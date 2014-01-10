@@ -35,13 +35,18 @@
 
     <div class="eleven wide middle column" style="">
       <div><h2 class="ui info">
-          <img class="ui big avatar image" src={{cri.logo}}>{{cri.name}}</h2>
+          <img class="ui big avatar image" ng-src={{cri.logo}}>{{cri.name}}</h2>
         <p>{{cri.info}}</p></div>
       <div class = "ui horizontal bulleted list">
         <div class="item"><a href={{cri.website}} target="_blank">官方網站</a></div>
         <div class="item"><a href={{cri.fb}} target="_blank">facebook</a></div>
       </div>
-      <h3 class="ui dividing header">事件列表</h3>
+
+      <div class="ui menu">
+        <a class="active gray item categoryMenu" value="">All</a>
+        <a class="{{item.color}} item categoryMenu" ng-repeat="item in categories" value={{item.name}}>{{item.name}}</a>
+      </div>
+
 
       <table class="ui sortable table segment">
         <!-- Sort Tables -->
@@ -71,7 +76,7 @@
            <th>相關人士</th>
        </tr></thead>
         <tbody>
-          <tr ng-repeat="n in event">
+          <tr ng-repeat="n in event | filter:topMenuFilter">
             <td>{{n.date}}</td>
             <td><a class='ui {{n.color}} mini label'>{{n.category}}</td>
             <td>{{n.list}}</td>
