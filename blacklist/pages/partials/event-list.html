@@ -104,7 +104,8 @@
 
 
 <div class="ten wide middle column" style="">
-      <div class="left floated date">瀏覽所有的事件</div>
+  <div class="left floated date">
+    瀏覽事件數：{{(events | filter:listFilter | filter:critiquerFilter | filter:topMenuFilter).length}}</div>
       <div class="ui menu">
         <a class="active gray item" value="">All</a>
         <a class="{{item.color}} item" ng-repeat="item in categories" value={{item.name}}>{{item.name}}</a>

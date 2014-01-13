@@ -48,141 +48,71 @@
         <a class="active item" data-tab="#/rank">blacklist</a>
         <a class="item" href="#/rank/white">whitelist</a>
 </div>
+
 <div class="ui divided selection list active tab" data-tab="black">
-	 <div class="active content menu">
-     <div class="ui form item">
-       <div class="grouped inline fields">
-         <div class="field">
-           <div class="ui checkbox">
-             <input type="checkbox">
-             <label>有疑慮</label>
-           </div>
-         </div>
-         <div class="field">
-           <div class="ui checkbox">
-             <input type="checkbox">
-             <label>不推薦</label>
-           </div>
-         </div>
-         <div class="field">
-           <div class="ui checkbox">
-             <input type="checkbox">
-             <label>強烈反對</label>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
-
-      <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
-    	<div class="ui basic vertical accordion menu">
-    		 <div class="item">
-    		  <a class="active title">
-              <div class="ui checkbox">
-              <input type="checkbox" name="small">
-              <label>所有</label>
-              </div>
-          </a>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-              環保
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-               	<div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>所有</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>綠盟</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group2">
-                     <label>地球公民</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group3">
-                     <label>環盟</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group4">
-                     <label>主婦聯盟</label>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-             土地
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>農陣</label>
-                   </div>
-                 </div>
-
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-             性別
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>所有</label>
-                   </div>
-                    <div class="field">
-                     <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>婦女新知</label>
-                     </div>
-                   </div>
-                   <div class="field">
-                     <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>台女連</label>
-                     </div>
-                   </div>
-                 </div>
-
-               </div>
-
-             </div>
-           </div>
-         </div>
-
+  <div class="active content menu">
+    <div class="ui form item">
+      <div class="grouped inline fields">
+        <div class="field">
+          <div class="ui checkbox listFilter">
+            <input type="checkbox" checked="true" value="有疑慮">
+            <label>有疑慮</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui checkbox listFilter">
+            <input type="checkbox" checked="true" value="不推薦">
+            <label>不推薦</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui checkbox listFilter">
+            <input type="checkbox" checked="true" value="強烈反對">
+            <label>強烈反對</label>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
 
-         <a class="ui mini red button">看結果</a>
 
+<div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
+<div class="ui basic vertical accordion menu">
+  <div class="item">
+    <a class="active title">
+      <div class="ui checkbox critiquerAllFilter">
+        <input type="checkbox" checked="ture">
+        <label>所有</label>
+      </div>
+    </a>
+  </div>
+
+  <div class="item" ng-repeat="group in ngoList">
+    <a class="active title">
+      <i class="dropdown icon"></i>
+      {{group.groupName}}
+    </a>
+
+    <div class="active content menu">
+      <div class="ui form item">
+        <div class="grouped inline fields" ng-repeat="ngo in group.groupMember">
+          <div class="field">
+            <div class="ui checkbox critiquerFilter">
+              <input type="checkbox" checked="true" name={{ngo}} value="{{ngo}}">
+              <label>{{ngo}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+        <a class="ui mini red button">apply</a>
+
+    </div>
     </div>
 
 
@@ -228,19 +158,32 @@
              <tr ng-repeat="n in legislators">
                <td>{{($index+1)}}</td>
                <td><a href="#/legislators/{{n.id}}"><img class="ui big avatar image" ng-src="{{n.avatar}}">{{n.name}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/環保">{{n.listSum.environment}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/勞工">{{n.listSum.labor}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/性別">{{n.listSum.gender}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/司法">{{n.listSum.judicial}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/人權">{{n.listSum.humanrights}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/土地">{{n.listSum.land}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/教育">{{n.listSum.education}}</a></td>
-               <td><a href="#/legislators/{{n.id}}/稅賦">{{n.listSum.tax}}</a></td>
-                 <td><a href="#/legislators/{{n.id}}">{{n.listSum.sum}}</a></td>
+               <!-- <td><a href="#/legislators/{{n.id}}/環保">{{n.listSum.environment}}</a></td> -->
+
+<td><a href="#/legislators/{{n.id}}/環保">{{(events[n.id][0]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}/勞工">{{(events[n.id][1]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}/性別">{{(events[n.id][2]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}/司法">{{(events[n.id][3]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}/人權">{{(events[n.id][4]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}/土地">{{(events[n.id][5]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}/教育">{{(events[n.id][6]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}/稅賦">{{(events[n.id][7]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+<td><a href="#/legislators/{{n.id}}">
+    {{(events[n.id][0]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][1]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][2]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][3]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][4]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][5]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][6]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][7]|filter:critiquerFilter|filter:listFilter).length}}
+
+</a></td>
              </tr>
            </tbody>
         </table>
-    <div class="one wide column" style="">
+
+   <div class="one wide column" style="">
    	</div>
 
   </div>

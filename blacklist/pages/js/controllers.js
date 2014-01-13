@@ -13,9 +13,22 @@ $(document)
 ;
 //Global Variables
 var legApp={};
-legApp.categories = ['環保', '性別', '勞工', '司法','人權','土地','教育','稅賦'];
+legApp.categories = ['環保', '勞工', '性別', '司法','人權','土地','教育','稅賦'];
 legApp.lists =['有疑慮','不推薦','強烈反對'];
-
+function getCategoryIndex(name){
+  var id = 0;
+  switch(name){
+      case '環保':id = 0; break;
+      case '勞工':id = 1; break;
+      case '性別':id = 2; break;
+      case '司法':id = 3; break;
+      case '人權':id = 4; break;
+      case '土地':id = 5; break;
+      case '教育':id = 6; break;
+      case '稅賦':id = 7; break;
+  }
+  return id;
+}
 
 
 
@@ -220,7 +233,6 @@ $scope.dataList = addEvent.testData.slice();
  */
 
 function addItem($scope, it) {
-  console.log(it);
   setTimeout(function(){$scope.$apply(function() {$scope.legislators.push(it);});}, 0);
 }
 
@@ -253,51 +265,8 @@ legControllers.controller('legListCtrl', function($scope) {
   $scope.legislators = [
   ];
 });
-/*
- *     for rank.html (display as index.html)
- */
 
-legControllers.controller('rankCtrl',['$scope','$routeParams',
 
- function($scope,$routeParams){
-  $('.ui.accordion')
-  .accordion()
-  ;
-  $('.ui.checkbox')
-  .checkbox()
-  ;
-
-  $('.ui.dropdown')
-  .dropdown()
-  ;
-
-  id = 0;
-  $scope.dbRef = new Firebase("https://blacklist.firebaseIO.com/legislator");
-  $scope.dbRef.on("child_added", function(d) {
-    v = d.val();
-    addItem($scope, v);
-  });
-  function wrap(a) {
-    id++;
-    return a.map(function(it) { return {id:id, v: it}; });
-  }
-  $scope.newLy = {}
-  $scope.addNewLy = function() {
-    no = $scope.legislators.length + 1;
-    avatar = CryptoJS.MD5("MLY/"+$scope.newLy.name).toString();
-    $scope.newLy.no = no;
-    $scope.newLy.committees = wrap([0,0,0,0,0,0,0,0,0]);
-    $scope.newLy.page = "na";
-    $scope.newLy.img = "http://avatars.io/50a65bb26e293122b0000073/"+avatar+"?size=medium"
-    $scope.dbRef.push($scope.newLy);
-    $scope.newLy = {};
-  }
-  $scope.legislators = [
-  ];
-    //{name: "呂小章", img: "01.jpg", page: "leg01.html", no: "1", committees: wrap([6,5,9,1,0,6,5,1,33]), committee: "經濟", party: "中國國民黨", section: "台北市第一選區"},
-    //{name: "王大平", img: "02.jpg", page: "leg02.html", no: "2", committees: wrap([3,4,5,2,4,0,0,6,24]), committee: "教育文化", party: "親民黨", section: "平地原住民"},
-    //{name: "陳阿明", img: "03.jpg", page: "leg03.html", no: "3", committees: wrap([1,1,3,0,7,2,3,2,19]), committee: "內政", party: "民主進步黨", section: "全國不分區"}
-}]);
 
 /* critiquers */
 
