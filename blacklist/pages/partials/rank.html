@@ -39,81 +39,77 @@
 
 
 <div class="ui celled grid">
-   <div class="row">
-   	<div class="one wide column" style="">
-   	 </div>
+  <div class="row">
     <div class="one wide column" style="">
-    	<div class="ui ribbon red label">名單選擇</div>
-<div class="ui tabular filter menu">
-        <a class="active item" data-tab="#/rank">blacklist</a>
-        <a class="item" href="#/rank/white">whitelist</a>
-</div>
-
-<div class="ui divided selection list active tab" data-tab="black">
-  <div class="active content menu">
-    <div class="ui form item">
-      <div class="grouped inline fields">
-        <div class="field">
-          <div class="ui checkbox listFilter">
-            <input type="checkbox" checked="true" value="有疑慮">
-            <label>有疑慮</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui checkbox listFilter">
-            <input type="checkbox" checked="true" value="不推薦">
-            <label>不推薦</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui checkbox listFilter">
-            <input type="checkbox" checked="true" value="強烈反對">
-            <label>強烈反對</label>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
-
-
-<div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
-<div class="ui basic vertical accordion menu">
-  <div class="item">
-    <a class="active title">
-      <div class="ui checkbox critiquerAllFilter">
-        <input type="checkbox" checked="ture">
-        <label>所有</label>
+    <div class="one wide column" style="">
+      <div class="ui ribbon red label">名單選擇</div>
+      <div class="ui tabular filter menu">
+        <a class="active item" href="#/rank">blacklist</a>
+        <a class="item" href="#/rank/white">whitelist</a>
       </div>
-    </a>
-  </div>
 
-  <div class="item" ng-repeat="group in ngoList">
-    <a class="active title">
-      <i class="dropdown icon"></i>
-      {{group.groupName}}
-    </a>
+      <div class="ui divided selection list active tab" data-tab="black">
+        <div class="active content menu">
+          <div class="ui form item">
+            <div class="grouped inline fields">
+              <div class="field">
+                <div class="ui checkbox listFilter">
+                  <input type="checkbox" checked="true" value="有疑慮">
+                  <label>有疑慮</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui checkbox listFilter">
+                  <input type="checkbox" checked="true" value="不推薦">
+                  <label>不推薦</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui checkbox listFilter">
+                  <input type="checkbox" checked="true" value="強烈反對">
+                  <label>強烈反對</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="active content menu">
-      <div class="ui form item">
-        <div class="grouped inline fields" ng-repeat="ngo in group.groupMember">
-          <div class="field">
-            <div class="ui checkbox critiquerFilter">
-              <input type="checkbox" checked="true" name={{ngo}} value="{{ngo}}">
-              <label>{{ngo}}</label>
+
+      <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
+      <div class="ui basic vertical accordion menu">
+        <div class="item">
+          <a class="active title">
+            <div class="ui checkbox critiquerAllFilter">
+              <input type="checkbox" checked="ture">
+              <label>所有</label>
+            </div>
+          </a>
+        </div>
+
+        <div class="item" ng-repeat="group in ngoList">
+          <a class="active title">
+            <i class="dropdown icon"></i>
+            {{group.groupName}}
+          </a>
+
+          <div class="active content menu">
+            <div class="ui form item">
+              <div class="grouped inline fields" ng-repeat="ngo in group.groupMember">
+                <div class="field">
+                  <div class="ui checkbox critiquerFilter">
+                    <input type="checkbox" checked="true" name={{ngo}} value="{{ngo}}">
+                    <label>{{ngo}}</label>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
-  </div>
-
-        <a class="ui mini red button">apply</a>
-
-    </div>
-    </div>
 
 
     <div class="ten wide middle column" style="">
@@ -183,6 +179,14 @@
            </tbody>
         </table>
 
+
+
+
+
+
+
+
+      </div>
    <div class="one wide column" style="">
    	</div>
 

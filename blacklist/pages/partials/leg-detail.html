@@ -102,20 +102,47 @@
   </div>
   </div>
 
-     <div class="ten wide middle column" style="">
+      <div class="ten wide middle column" style="">
+            <div class="ui label">
+            總計
+          <div class="detail">{{(events | filter:listFilter | filter:critiquerFilter | filter:topMenuFilter).length}}</div>
+        </div>
+        <div>
+          <h2 class="ui info">
+            <img class="ui big avatar image" ng-src={{leg.avatar}}>{{leg.name}}</h2>
+          <p>{{leg.eleDistrict}} {{leg.districtDetail}}</p></div>
 
-      <div><h2 class="ui info">
-          <img class="ui big avatar image" ng-src={{leg.avatar}}>{{leg.name}}</h2>
-        <p>{{leg.eleDistrict}} {{leg.districtDetail}}</p></div>
 
       <div class="ui menu">
         <a class="active gray item categoryMenu" value="">All</a>
-        <a class="{{item.color}} item categoryMenu" ng-repeat="item in categories" value={{item.name}}>{{item.name}}</a>
-      </div>
+        <a class="{{item.color}} item categoryMenu" ng-repeat="item in categories" value={{item.name}}>{{item.name}}
 
+          </a>
+        </div>
+
+  <script type="text/javascript">
+  $(function() {
+    var table = $('<table></table>');
+    table.append('<thead><tr><th class="number">Number</th></tr></thead>');
+    var tbody = $('<tbody></tbody>');
+    for(var i = 0; i<100; i++) {
+      tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
+    }
+    table.append(tbody);
+    $('.example.ex-2').append(table);
+
+    $('table').tablesort().data('tablesort');
+
+    $('thead th.number').data('sortBy', function(th, td, sorter) {
+      return parseInt(td.text(), 10);
+    });
+
+  });
+  </script>
 
       <table class="ui sortable table segment">
-        <thead>
+
+       <thead>
           <tr><th>日期</th>
             <th>分類</th>
             <th>名單</th>

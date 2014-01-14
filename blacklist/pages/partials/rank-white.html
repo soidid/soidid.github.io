@@ -1,4 +1,5 @@
 ﻿
+
 <div class="ui inverted menu">
   <a class="active item" href="index.html">
     <i class="thumbs down outline icon"></i> The Blacklist
@@ -39,184 +40,114 @@
 
 
 <div class="ui celled grid">
-   <div class="row">
-   	<div class="one wide column" style="">
-   	 </div>
+  <div class="row">
     <div class="one wide column" style="">
-    	<div class="ui ribbon red label">名單選擇</div>
-<div class="ui tabular filter menu">
+    </div>
+    <div class="one wide column" style="">
+      <div class="ui ribbon red label">名單選擇</div>
+      <div class="ui tabular filter menu">
         <a class="item" href="#/rank">blacklist</a>
         <a class="active item" href="#/rank/white">whitelist</a>
-</div>
-<div class="ui divided selection list active tab" data-tab="white">
-	 <div class="content menu">
-        <div class="ui form item">
-        	選擇 whitelist，右方將顯示不在黑名單上的立委有哪些。目前顯示範圍：第八屆立委。
-        </div>
-   </div>
-</div>
-
-
-      <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
-    	<div class="ui basic vertical accordion menu">
-    		 <div class="item">
-    		  <a class="active title">
-              <div class="ui checkbox">
-              <input type="checkbox" name="small">
-              <label>所有</label>
-              </div>
-          </a>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-              環保
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-               	<div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>所有</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group1">
-                     <label>綠盟</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group2">
-                     <label>地球公民</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group3">
-                     <label>環盟</label>
-                   </div>
-                 </div>
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="group4">
-                     <label>主婦聯盟</label>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-             土地
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>農陣</label>
-                   </div>
-                 </div>
-
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="item">
-           <a class="active title">
-             <i class="dropdown icon"></i>
-             性別
-           </a>
-           <div class="active content menu">
-             <div class="ui form item">
-               <div class="grouped inline fields">
-                 <div class="field">
-                   <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>所有</label>
-                   </div>
-                    <div class="field">
-                     <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>婦女新知</label>
-                     </div>
-                   </div>
-                   <div class="field">
-                     <div class="ui checkbox">
-                     <input type="checkbox" name="small">
-                     <label>台女連</label>
-                     </div>
-                   </div>
-                 </div>
-
-               </div>
-
-             </div>
-           </div>
-         </div>
-
       </div>
 
-         <a class="ui mini red button">看結果</a>
+      <div class="ui divided selection list active tab" data-tab="white">
+        <div class="active content menu">
+          <div class="ui form item">
+            <div class="grouped inline fields">
+              <div class="field">
+                <div class="ui checkbox listFilter">
+                  <input type="checkbox" checked="true" value="有疑慮">
+                  <label>有疑慮</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui checkbox listFilter">
+                  <input type="checkbox" checked="true" value="不推薦">
+                  <label>不推薦</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui checkbox listFilter">
+                  <input type="checkbox" checked="true" value="強烈反對">
+                  <label>強烈反對</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+
+      <div class="ui ribbon teal label">誰來把關：你想看誰的白名單？</div>
+      <div class="ui basic vertical accordion menu">
+        <div class="item">
+          <a class="active title">
+            <div class="ui checkbox critiquerAllFilter">
+              <input type="checkbox" checked="ture">
+              <label>所有</label>
+            </div>
+          </a>
+        </div>
+
+        <div class="item" ng-repeat="group in ngoList">
+          <a class="active title">
+            <i class="dropdown icon"></i>
+            {{group.groupName}}
+          </a>
+
+          <div class="active content menu">
+            <div class="ui form item">
+              <div class="grouped inline fields" ng-repeat="ngo in group.groupMember">
+                <div class="field">
+                  <div class="ui checkbox critiquerFilter">
+                    <input type="checkbox" checked="true" name={{ngo}} value="{{ngo}}">
+                    <label>{{ngo}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
 
     <div class="ten wide middle column" style="">
 
-      <div class="left floated">未上榜立委次數一覽表</div>
-      <script type="text/javascript">
-        $(function() { var table = $('<table></table>');
-            table.append('<thead><tr><th class="number">Number</th></tr></thead>');
-            var tbody = $('<tbody></tbody>');
-            for(var i = 0; i<100; i++) {
-            tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
-            }
-            table.append(tbody);
-            $('.example.ex-2').append(table);
-
-            $('table').tablesort().data('tablesort');
-
-            $('thead th.number').data('sortBy', function(th, td, sorter) {
-              return parseInt(td.text(), 10);
-              });
-
-            });
-</script>
-
-
+      <div class="left floated">白名單（不在黑名單上的立委名單），也就是上榜總計次數為0者。</div>
       <table class="ui sortable table segment">
-           <thead>
-             <tr><th>No</th>
-             <th>立委</th>
-             <th>環保</th>
-             <th>勞工</th>
-             <th>性別</th>
-             <th>司法</th>
-             <th>人權</th>
-             <th>土地</th>
-             <th>教育</th>
-             <th>稅賦</th>
-             <th>總計</th>
-           </tr></thead>
-           <tbody >
-             <tr ng-repeat="n in legislators">
-               <td>{{($index+1)}}</td>
-               <td><a href="#/legislators/{{n.id}}"# target="_blank"><img class="ui big avatar image" src="{{n.avatar}}">{{n.name}}</a></td>
-               <!----------------------------->
-               <!--
-                   <td ng-repeat="v in n.committees">{{v.v}}</td>
-                   -->
-             </tr>
-           </tbody>
-        </table>
-    <div class="one wide column" style="">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>選區</th>
+            <th>範圍</th>
+            <th>黨籍</th>
+            <th>委員會</th>
+        </tr></thead>
+
+        <tbody>
+          <tr ng-repeat="n in legislators">
+            <td><a href="#/legislators/{{n.id}}">
+                <img class="ui big avatar image" ng-src="{{n.avatar}}">{{n.name}}</a></td>
+            <td>{{n.eleDistrict}}</td>
+            <td>{{n.districtDetail}}</td>
+            <td>{{n.party}}</td>
+            <td>{{n.committee}}<input value="{{(events[n.id][0]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][1]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][2]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][3]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][4]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][5]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][6]|filter:critiquerFilter|filter:listFilter).length +
+      (events[n.id][7]|filter:critiquerFilter|filter:listFilter).length}}" class="LegSum" id="Leg{{n.id}}" type="hidden">
+           </td>
+          </tr>
+        </tbody>
+      </table>
+
+  </div>
+   <div class="one wide column" style="">
    	</div>
 
   </div>

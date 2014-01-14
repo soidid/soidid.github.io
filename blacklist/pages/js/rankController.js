@@ -24,6 +24,7 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
       $scope.listSelection.push(name);
     }
     $scope.$apply();//refresh the page
+    $scope.zeroRecordUpdater();
     console.log($scope.listSelection);
   };
 
@@ -69,6 +70,7 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
       }
     }
     $scope.$apply();//refresh the page
+    $scope.zeroRecordUpdater();
   };
 
   $scope.allCritiquerSelected = true;
@@ -89,9 +91,10 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
       $scope.critiquerSelection = [];
     }
     $scope.$apply();//refresh the page
+    $scope.zeroRecordUpdater();
+
+
   };
-
-
   $('.critiquerAllFilter').on('click',$scope.toggleAllCritiquer);
 
 
@@ -124,6 +127,29 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
 
 
 
+
+var iii = 0;
+
+// Zero Record / Whitelist Updater
+  $scope.zeroRecordUpdater = function(){
+    setTimeout(function(){$scope.$apply(function() {
+      $(".LegSum").each(function(index,element){
+        var current = $(element).closest("tr");
+        //console.log(current);
+        console.log("["+iii+"]"+$(element).id + ":" + $(element).val());
+        iii++;
+        if($(element).val() > 0)
+          current.css("display","none");
+        else{
+          current.removeAttr("style");
+        }
+      });
+    });}, 0);
+  };
+
+
+
+
 // Display Rank Start //////////////////////////////////////////////////
 
   //Retrieve Legislator Data --> $scope.legislators
@@ -132,6 +158,7 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
   $scope.dbRef.on("child_added", function(d) {
     v = d.val();
     addItem($scope, v);
+
   });
 
 
@@ -147,6 +174,8 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
     v.color = getColor(v.category);
     for(var i=0;i<v.relatedLeg.length;i++){
         $scope.addEventItem($scope, v, v.relatedLeg[i], getCategoryIndex(v.category));
+//$scope.$apply();
+$scope.zeroRecordUpdater();
     }
   });
   $scope.events=[];
