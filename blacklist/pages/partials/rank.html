@@ -14,41 +14,41 @@
   </a>
 
   <div class="right menu">
-    <div class="item" ng-click="loginPanel()" ng-show="!user">
-      登入
+    <div class="item" ng-show="!user">
+      <a href="#/login">登入</a>
     </div>
     <div class="item" ng-show="user">
       {{user.email}}
     </div>
-    <div class="item" ng-show="user" ng-click="logout()">
-      登出
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="#/add-event" >新增事件</a>
+    </div>
+    <!--
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="" ng-click="changePwdPanel()">修改密碼</a>
+    </div>
+    -->
+    <div class="item" ng-show="user">
+      <a href="" ng-click="logout()">登出</a>
     </div>
     <div class="item">
-      <div class="ui mini icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
     </div>
   </div>
 
 </div>
 
- <div class="ui segment">
-   <p>收集議題關注者、NGO、NPO 的不推薦名單</p>
-</div>
+ <div class="ui segment"><p>收集議題關注者、NGO、NPO 的不推薦名單</p></div>
 
 
 <div class="ui celled grid">
   <div class="row">
-    <div class="one wide column" style="">
-    </div>
-    <div class="one wide column" style="">
+    <div class="one wide column" style=""></div>
+     <div class="one wide column" style="">
       <div class="ui ribbon red label">名單選擇</div>
       <div class="ui tabular filter menu">
         <a class="active item" href="#/rank">blacklist</a>
         <a class="item" href="#/rank/white">whitelist</a>
       </div>
-
       <div class="ui divided selection list active tab" data-tab="black">
         <div class="active content menu">
           <div class="ui form item">
@@ -75,8 +75,6 @@
           </div>
         </div>
       </div>
-
-
       <div class="ui ribbon red label">誰來把關：你想看誰的黑名單？</div>
       <div class="ui basic vertical accordion menu">
         <div class="item">
@@ -87,7 +85,6 @@
             </div>
           </a>
         </div>
-
         <div class="item" ng-repeat="group in ngoList">
           <a class="active title">
             <i class="dropdown icon"></i>
@@ -109,10 +106,7 @@
         </div>
       </div>
     </div>
-  </div>
-
-
-    <div class="ten wide middle column" style="">
+    <div class="twelve wide column" style="">
 
           <div class="left floated">立委上榜次數一覽表</div>
   <script type="text/javascript">
@@ -131,12 +125,10 @@
 		$('thead th.number').data('sortBy', function(th, td, sorter) {
 			return parseInt(td.text(), 10);
 		});
-
 	});
   </script>
 
-
-      <table class="ui sortable table segment">
+<table class="ui sortable table segment">
            <thead>
              <tr><th>No</th>
              <th>立委</th>
@@ -173,22 +165,10 @@
       (events[n.id][5]|filter:critiquerFilter|filter:listFilter).length +
       (events[n.id][6]|filter:critiquerFilter|filter:listFilter).length +
       (events[n.id][7]|filter:critiquerFilter|filter:listFilter).length}}
+</a></td></tr></tbody></table>
+</div>
 
-</a></td>
-             </tr>
-           </tbody>
-        </table>
-
-
-
-
-
-
-
-
-      </div>
-   <div class="one wide column" style="">
-   	</div>
+<div class="one wide column" style=""></div>
 
   </div>
 </div>
@@ -218,6 +198,34 @@
   </div>
   <div class="actions">
     <div class="ui button">取消</div>
+  </div>
+</div>
+
+<div class="ui modal" id="changePwd-panel">
+  <i class="close icon"></i>
+  <div class="header">
+    修改密碼
+  </div>
+  <div class="content">
+    <div class="ui form segment">
+       <div class="field">
+          <label>電子郵件</label>
+          <input type="text" value={{account}} ng-model="account">
+       </div>
+       <div class="field">
+          <label>原密碼</label>
+          <input type="password" placeholder="" ng-model="oldPassword">
+       </div>
+       <div class="field">
+          <label>新密碼</label>
+          <input type="password" placeholder="" ng-model="newPassword">
+       </div>
+       <div class="field" style="text-align: center">
+         <div class="ui buttons">
+           <div class="ui small teal button" ng-click="changePwd()">確認修改</div>
+         </div>
+
+       </div>
   </div>
 </div>
 

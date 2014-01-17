@@ -15,14 +15,29 @@
     議題關注者
   </a>
 
+
   <div class="right menu">
+    <div class="item" ng-show="!user">
+      <a href="#/login">登入</a>
+    </div>
+    <div class="item" ng-show="user">
+      {{user.email}}
+    </div>
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="#/add-event" >新增事件</a>
+    </div>
+    <!--
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="" ng-click="changePwdPanel()">修改密碼</a>
+    </div>
+    -->
+    <div class="item" ng-show="user">
+      <a href="" ng-click="logout()">登出</a>
+    </div>
     <div class="item">
-      <div class="ui mini icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
     </div>
   </div>
+
 
 </div>
 
@@ -32,12 +47,14 @@
 
 <div class="ui celled grid">
   <div class="row">
+
     <div class="two wide column" style="">
       搜尋：
       <div class="ui input">
         <input type="text" ng-model="query">
       </div>
       <div class="ui mini dropdown">
+        <br/>
         <div class="text" name="select">選擇篩選條件</div>
         <input type="hidden" name="select" ng-model="query2">
         <i class="dropdown icon"></i>
@@ -49,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="ten wide middle column" style="">
+    <div class="fourteen wide column" style="">
 
 
       <div class="left floated">根據選區、姓名等選擇您想進一步了解的立委</div>

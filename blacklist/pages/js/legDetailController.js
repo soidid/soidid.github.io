@@ -2,7 +2,13 @@
 legControllers.controller('legDetailCtrl',['$scope','$routeParams',
 
 function($scope,$routeParams){
-/////// Top Menu //////////////
+
+   login($scope, function(){ });
+
+
+
+
+  /////// Top Menu //////////////
 
 
    $scope.categoryPrechoice = $routeParams.category;
@@ -204,6 +210,7 @@ $scope.topMenuFilter = function(n){
 
        $scope.legdbRef.on("child_added", function(d) {
          v = d.val();
+         //console.log(v);
          if(v.id==$scope.legId){
            $scope.leg = v;
            $scope.legEvents = v.event;
@@ -221,14 +228,14 @@ $scope.topMenuFilter = function(n){
 
        $scope.eventdbRef.on("child_added", function(d) {
          v = d.val();
-         var idx = $scope.legEvents.indexOf(v.id);
-         if (idx > -1)
-         {
-           v.color = getColor(v.category);
-           $scope.addEventItem($scope, v);
-           //console.log(v);
+         if($scope.legEvents!=null){
+           var idx = $scope.legEvents.indexOf(v.id);
+           if (idx > -1)
+             {
+               v.color = getColor(v.category);
+               $scope.addEventItem($scope, v);
+             }
          }
-
        });
     }
 ]);

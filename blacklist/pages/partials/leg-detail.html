@@ -13,11 +13,24 @@
   </a>
 
   <div class="right menu">
+    <div class="item" ng-show="!user">
+      <a href="#/login">登入</a>
+    </div>
+    <div class="item" ng-show="user">
+      {{user.email}}
+    </div>
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="#/add-event" >新增事件</a>
+    </div>
+    <!--
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="" ng-click="changePwdPanel()">修改密碼</a>
+    </div>
+    -->
+    <div class="item" ng-show="user">
+      <a href="" ng-click="logout()">登出</a>
+    </div>
     <div class="item">
-      <div class="ui mini icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
     </div>
   </div>
 
@@ -100,9 +113,8 @@
   </div>
   </div>
   </div>
-  </div>
 
-      <div class="ten wide middle column" style="">
+      <div class="twelve wide middle column" style="">
             <div class="ui label">
             總計
           <div class="detail">{{(events | filter:listFilter | filter:critiquerFilter | filter:topMenuFilter).length}}</div>
@@ -157,7 +169,7 @@
             <td>{{n.list}}</td>
             <td><a href=#/event/{{n.id}}>{{n.name}}</a></td>
             <td>{{n.abstract}}</td>
-            <td>{{n.ngo}}</td>
+            <td><a href=#/critiquers/{{n.ngoId}}>{{n.ngo}}</a></td>
           </tr>
         </tbody>
       </table>
