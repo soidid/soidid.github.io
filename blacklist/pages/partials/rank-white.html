@@ -15,22 +15,28 @@
   </a>
 
   <div class="right menu">
-    <div class="item" ng-click="loginPanel()" ng-show="!user">
-      登入
+    <div class="item" ng-show="!user">
+      <a href="#/login">登入</a>
     </div>
     <div class="item" ng-show="user">
       {{user.email}}
     </div>
-    <div class="item" ng-show="user" ng-click="logout()">
-      登出
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="#/add-event" >新增事件</a>
+    </div>
+    <!--
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="" ng-click="changePwdPanel()">修改密碼</a>
+    </div>
+    -->
+    <div class="item" ng-show="user">
+      <a href="" ng-click="logout()">登出</a>
     </div>
     <div class="item">
-      <div class="ui mini icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search link icon"></i>
-      </div>
     </div>
   </div>
+
+
 
 </div>
 
@@ -41,8 +47,7 @@
 
 <div class="ui celled grid">
   <div class="row">
-    <div class="one wide column" style="">
-    </div>
+    <div class="one wide column" style=""></div>
     <div class="one wide column" style="">
       <div class="ui ribbon red label">名單選擇</div>
       <div class="ui tabular filter menu">
@@ -110,10 +115,7 @@
         </div>
       </div>
     </div>
-  </div>
-
-
-    <div class="ten wide middle column" style="">
+    <div class="twelve wide column" style="">
 
       <div class="left floated">白名單（不在黑名單上的立委名單），也就是上榜總計次數為0者。</div>
       <table class="ui sortable table segment">
@@ -146,9 +148,10 @@
         </tbody>
       </table>
 
+
+
   </div>
-   <div class="one wide column" style="">
-   	</div>
+   <div class="one wide column" style=""></div>
 
   </div>
 </div>

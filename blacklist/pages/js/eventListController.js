@@ -16,6 +16,7 @@ function getColor(categoryName){
 legControllers.controller('eventListCtrl', function($scope){
 
 
+  login($scope, function(){ });
 /////// Top Menu //////////////
 
 // Category Button
@@ -202,6 +203,7 @@ $scope.topMenuFilter = function(n){
     v = d.val();
     v.color = getColor(v.category);
     $scope.addEventItem($scope, v);
+    console.log(v);
   });
   $scope.events=[];
 });

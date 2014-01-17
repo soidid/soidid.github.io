@@ -3,6 +3,9 @@ legControllers.controller('criDetailCtrl',['$scope','$routeParams',
 
     function($scope,$routeParams){
 
+      login($scope, function(){ });
+
+
       /////// Top Menu //////////////
       // Category Button
       $scope.categories = [];

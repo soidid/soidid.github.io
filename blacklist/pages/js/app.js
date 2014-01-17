@@ -8,6 +8,14 @@ var legApp = angular.module("legApp", [
 legApp.config(['$routeProvider','$locationProvider',
   function($routeProvider,$locationProvider){
     $routeProvider.
+      when('/login',{
+      templateUrl: 'partials/login.html',
+      controller: 'loginCtrl'
+    }).
+      when('/add-event',{
+      templateUrl: 'partials/add-event.html',
+      controller: 'addEventCtrl'
+    }).
       when('/rank',{
       templateUrl: 'partials/rank.html',
       controller: 'rankCtrl'

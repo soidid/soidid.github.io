@@ -1,0 +1,349 @@
+<div class="ui inverted menu">
+  <a class="item" href="index.html">
+    <i class="thumbs down outline icon"></i> The Blacklist
+  </a>
+  <a class="item" href="index.html#/legislators">
+    立委
+  </a>
+  <a class="active item" href="index.html#/events">
+    事件
+  </a>
+  <a class="item" href="index.html#/critiquers">
+    議題關注者
+  </a>
+
+
+
+  <div class="right menu">
+    <div class="item" ng-show="!user">
+      <a href="" ng-click="loginPanel()">登入</a>
+    </div>
+    <div class="item" ng-show="user" id="userEmail">
+      {{user.email}}
+    </div>
+    <!--
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="#/add-event" >新增事件</a>
+    </div>
+    <div class="item" ng-show="user" ng-show="user">
+      <a href="" ng-click="changePwdPanel()">修改密碼</a>
+    </div>
+     -->
+    <div class="item" ng-show="user">
+      <a href="" ng-click="logout()">登出</a>
+    </div>
+    <div class="item">
+    </div>
+  </div>
+
+</div>
+
+<div class="ui segment">
+  <p>收集議題關注者、NGO、NPO 的不推薦名單</p>
+</div>
+
+
+<div class="ui celled grid">
+  <div class="row">
+    <div class="one wide column" style="">
+      <div class="ui list">
+        <div class="item">
+          <div class="ui mini teal button" ng-click="fillInTestData()">
+            fill
+          </div>
+        </div>
+        <div class="item">
+          <div class="ui mini orange button" ng-click="clearData()">
+            reset
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eleven wide middle column" style="">
+      <div class="ui form segment">
+        <h2 class="ui header">
+          建立新事件
+        </h2>
+        <div class="field">
+          <label>{{ngoName}}</label>
+        </div>
+
+        <div class="field">
+          <div class="ui ribbon black label">I. 名稱及類屬</div>
+        </div>
+        <div class="field">
+          <label>事件名稱</label>
+          <div class="ui input">
+            <input type="text"
+            placeholder="例如：提出公職人員利益衝突迴避法第九條及第十五條條文修正草案"
+            ng-model="newEvent.name">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="ui pointing below label">所屬類型</div>
+          <div class="ui ten column divided grid">
+            <div class="row">
+              <!--ISSUE:should be 'ui checkbox' but semantic ui block the on-click handler.-->
+              <div class="column" ng-repeat="category in categories">
+                <div class="ui radio checkbox category">
+                  <input
+                  type="radio"
+                  name="category"
+                  value="{{category}}"
+                  > <label>{{category}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <div class="ui pointing below label">所屬表單</div>
+
+          <div class="ui ten column divided grid">
+            <div class="row">
+              <div class="column" ng-repeat='list in lists'>
+                <div class="ui radio checkbox eventlist">
+                  <input type="radio" name="list">
+                  <label>{{list}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="field">
+          <div class="ui ribbon black label">II. 摘要及說明</div>
+        </div>
+        <div class="field">
+          <label>事件摘要</label>
+          <div class="ui input">
+            <input type="text" placeholder="例如：放寬利益迴避相關規範，恐將使利益輸送情況加劇。"
+            ng-model="newEvent.abstract">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>相關人士</label>
+          <!--<div class="ui input">
+            <input type="text" placeholder="請輸入相關之立委姓名。" ng-model="peopleData">
+          </div>-->
+          <div class="field">
+            <div>
+              <select data-placeholder="請輸入相關之立委姓名。" class="chosen-select" multiple style="width:350px;"
+                tabindex="50" ng-model="peopleData" id="people">
+                <option value=""></option>
+                <option value="{id:1,name:丁守中}">丁守中</option>
+                <option value="{id:2,name:何欣純}">何欣純</option>
+                <option value="{id:3,name:劉建國}">劉建國</option>
+                <option value="{id:4,name:劉櫂豪}">劉櫂豪</option>
+                <option value="{id:5,name:吳秉叡}">吳秉叡</option>
+                <option value="{id:6,name:吳宜臻}">吳宜臻</option>
+                <option value="{id:7,name:吳育仁}">吳育仁</option>
+                <option value="{id:8,name:吳育昇}">吳育昇</option>
+                <option value="{id:9,name:呂學樟}">呂學樟</option>
+                <option value="{id:10,name:呂玉玲}">呂玉玲</option>
+                <option value="{id:11,name:姚文智}">姚文智</option>
+                <option value="{id:12,name:孔文吉}">孔文吉</option>
+                <option value="{id:13,name:孫大千}">孫大千</option>
+                <option value="{id:14,name:尤美女}">尤美女</option>
+                <option value="{id:15,name:廖國棟}">廖國棟</option>
+                <option value="{id:16,name:廖正井}">廖正井</option>
+                <option value="{id:17,name:張嘉郡}">張嘉郡</option>
+                <option value="{id:18,name:張慶忠}">張慶忠</option>
+                <option value="{id:19,name:張曉風}">張曉風</option>
+                <option value="{id:20,name:徐少萍}">徐少萍</option>
+                <option value="{id:21,name:徐欣瑩}">徐欣瑩</option>
+                <option value="{id:22,name:徐耀昌}">徐耀昌</option>
+                <option value="{id:23,name:曾巨威}">曾巨威</option>
+                <option value="{id:24,name:李俊俋}">李俊俋</option>
+                <option value="{id:25,name:李慶華}">李慶華</option>
+                <option value="{id:26,name:李應元}">李應元</option>
+                <option value="{id:27,name:李昆澤}">李昆澤</option>
+                <option value="{id:28,name:李桐豪}">李桐豪</option>
+                <option value="{id:29,name:李貴敏}">李貴敏</option>
+                <option value="{id:30,name:李鴻鈞}">李鴻鈞</option>
+                <option value="{id:31,name:林世嘉}">林世嘉</option>
+                <option value="{id:32,name:林佳龍}">林佳龍</option>
+                <option value="{id:33,name:林國正}">林國正</option>
+                <option value="{id:34,name:林岱樺}">林岱樺</option>
+                <option value="{id:35,name:林德福}">林德福</option>
+                <option value="{id:36,name:林明溱}">林明溱</option>
+                <option value="{id:37,name:林正二}">林正二</option>
+                <option value="{id:38,name:林淑芬}">林淑芬</option>
+                <option value="{id:39,name:林滄敏}">林滄敏</option>
+                <option value="{id:40,name:林郁方}">林郁方</option>
+                <option value="{id:41,name:林鴻池}">林鴻池</option>
+                <option value="{id:42,name:柯建銘}">柯建銘</option>
+                <option value="{id:43,name:楊應雄}">楊應雄</option>
+                <option value="{id:44,name:楊曜}">楊曜</option>
+                <option value="{id:45,name:楊玉欣}">楊玉欣</option>
+                <option value="{id:46,name:楊瓊瓔}">楊瓊瓔</option>
+                <option value="{id:47,name:楊麗環}">楊麗環</option>
+                <option value="{id:48,name:段宜康}">段宜康</option>
+                <option value="{id:49,name:江啟臣}">江啟臣</option>
+                <option value="{id:50,name:江惠貞}">江惠貞</option>
+                <option value="{id:51,name:洪秀柱}">洪秀柱</option>
+                <option value="{id:52,name:潘孟安}">潘孟安</option>
+                <option value="{id:53,name:潘維剛}">潘維剛</option>
+                <option value="{id:54,name:王廷升}">王廷升</option>
+                <option value="{id:55,name:王惠美}">王惠美</option>
+                <option value="{id:56,name:王育敏}">王育敏</option>
+                <option value="{id:57,name:王進士}">王進士</option>
+                <option value="{id:58,name:王金平}">王金平</option>
+                <option value="{id:59,name:田秋堇}">田秋堇</option>
+                <option value="{id:60,name:盧嘉辰}">盧嘉辰</option>
+                <option value="{id:61,name:盧秀燕}">盧秀燕</option>
+                <option value="{id:62,name:管碧玲}">管碧玲</option>
+                <option value="{id:63,name:簡東明}">簡東明</option>
+                <option value="{id:64,name:紀國棟}">紀國棟</option>
+                <option value="{id:65,name:羅明才}">羅明才</option>
+                <option value="{id:66,name:羅淑蕾}">羅淑蕾</option>
+                <option value="{id:67,name:翁重鈞}">翁重鈞</option>
+                <option value="{id:68,name:葉宜津}">葉宜津</option>
+                <option value="{id:69,name:葉津鈴}">葉津鈴</option>
+                <option value="{id:70,name:蔡其昌}">蔡其昌</option>
+                <option value="{id:71,name:蔡正元}">蔡正元</option>
+                <option value="{id:72,name:蔡煌瑯}">蔡煌瑯</option>
+                <option value="{id:73,name:蔡錦隆}">蔡錦隆</option>
+                <option value="{id:74,name:蔣乃辛}">蔣乃辛</option>
+                <option value="{id:75,name:蕭美琴}">蕭美琴</option>
+                <option value="{id:76,name:薛凌}">薛凌</option>
+                <option value="{id:77,name:蘇清泉}">蘇清泉</option>
+                <option value="{id:78,name:蘇震清}">蘇震清</option>
+                <option value="{id:79,name:許忠信}">許忠信</option>
+                <option value="{id:80,name:許智傑}">許智傑</option>
+                <option value="{id:81,name:許添財}">許添財</option>
+                <option value="{id:82,name:詹凱臣}">詹凱臣</option>
+                <option value="{id:83,name:謝國樑}">謝國樑</option>
+                <option value="{id:84,name:費鴻泰}">費鴻泰</option>
+                <option value="{id:85,name:賴士葆}">賴士葆</option>
+                <option value="{id:86,name:趙天麟}">趙天麟</option>
+                <option value="{id:87,name:邱志偉}">邱志偉</option>
+                <option value="{id:88,name:邱文彥}">邱文彥</option>
+                <option value="{id:89,name:邱議瑩}">邱議瑩</option>
+                <option value="{id:90,name:鄭天財}">鄭天財</option>
+                <option value="{id:91,name:鄭汝芬}">鄭汝芬</option>
+                <option value="{id:92,name:鄭麗君}">鄭麗君</option>
+                <option value="{id:93,name:陳亭妃}">陳亭妃</option>
+                <option value="{id:94,name:陳其邁}">陳其邁</option>
+                <option value="{id:95,name:陳唐山}">陳唐山</option>
+                <option value="{id:96,name:陳學聖}">陳學聖</option>
+                <option value="{id:97,name:陳怡潔}">陳怡潔</option>
+                <option value="{id:98,name:陳明文}">陳明文</option>
+                <option value="{id:99,name:陳根德}">陳根德</option>
+                <option value="{id:100,name:陳歐珀}">陳歐珀</option>
+                <option value="{id:101,name:陳淑慧}">陳淑慧</option>
+                <option value="{id:102,name:陳碧涵}">陳碧涵</option>
+                <option value="{id:103,name:陳節如}">陳節如</option>
+                <option value="{id:104,name:陳超明}">陳超明</option>
+                <option value="{id:105,name:陳鎮湘}">陳鎮湘</option>
+                <option value="{id:106,name:陳雪生}">陳雪生</option>
+                <option value="{id:107,name:顏寬恒}">顏寬恒</option>
+                <option value="{id:108,name:顏清標}">顏清標</option>
+                <option value="{id:109,name:馬文君}">馬文君</option>
+                <option value="{id:110,name:高志鵬}">高志鵬</option>
+                <option value="{id:111,name:高金素梅}">高金素梅</option>
+                <option value="{id:112,name:魏明谷}">魏明谷</option>
+                <option value="{id:113,name:黃偉哲}">黃偉哲</option>
+                <option value="{id:114,name:黃志雄}">黃志雄</option>
+                <option value="{id:115,name:黃文玲}">黃文玲</option>
+                <option value="{id:116,name:黃昭順}">黃昭順</option>
+              </div>
+
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>完整說明</label>
+        <textarea ng-model="newEvent.content"></textarea>
+      </div>
+
+      <div class="field">
+        <div class="ui ribbon black label">III. 相關資料</div>
+      </div>
+
+
+      <div class="ui fluid form segment">
+        <div class="three fields dataListItem" ng-repeat='source in dataList'>
+          <div class="field">
+            <label>資料說明</label>
+            <input value={{source.title}} type="text" class="dataTitle">
+          </div>
+          <div class="field">
+            <label>連結</label>
+            <input value={{source.link}} type="text" class="dataLink">
+          </div>
+          <div class="field">
+            <label><br/></label>
+            <a href ng-click="dataList.splice($index,1)">x</a>
+          </div>
+        </div>
+        <div class="three fields dataListItem" ng-repeat='source in dataHint'>
+          <div class="field">
+            <label>資料說明</label>
+            <input placeholder={{source.title}} type="text" class="dataTitle">
+          </div>
+          <div class="field">
+            <label>連結</label>
+            <input placeholder={{source.link}} type="text" class="dataLink">
+          </div>
+          <div class="field">
+            <label><br/></label>
+            <a href ng-click="dataHint.splice($index,1)">x</a>
+          </div>
+        </div>
+
+        <div class="ui labeled mini icon button" ng-click="dataHint.push({})">
+          新增資料欄位
+          <i class="add icon"></i>
+        </div>
+
+      </div>
+
+
+
+      <div class="ui center aligned segment">
+        <div class="ui small purple submit button" ng-click="addNewEvent()">建立事件</div>
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+  <div class="one wide column" style="">
+  </div>
+
+</div>
+</div>
+<!-- Multiple Choices -->
+<script src="js/chosen.jquery.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  var config = {
+    '.chosen-select'           : {},
+    '.chosen-select-deselect'  : {allow_single_deselect:true},
+    '.chosen-select-no-single' : {disable_search_threshold:10},
+    '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+    '.chosen-select-width'     : {width:"95%"}
+  }
+for (var selector in config) {
+  $(selector).chosen(config[selector]);
+
+
+}
+</script>
+
+
+
+
+
