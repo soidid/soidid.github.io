@@ -10,6 +10,7 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
      console.log("Welcome back!"+$scope.user.email);
    });
 
+   $scope.categories = legApp.categories;
 ////// Left Menu Start////////////
 
 
@@ -41,19 +42,12 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
     }
   };
   //Current Group & NGO List
-  /*
-  $scope.ngoList = [{"groupName":"環保", "groupMember":[{"name":"綠盟"},{"name":"地球公民"},{"name":"環保聯盟"},
-                {"groupName":"土地", "groupMember":[{"name":"農陣"}]},
-                {"groupName":"性別", "groupMember":[{"name":"婦女新知"},{"name":"台女連"}]},
-                {"groupName":"其他", "groupMember":[{"name":"公督盟"}]}]}];
-  */
-  $scope.ngoList = [{"groupName":"環保", "groupMember":["綠盟","地球公民","環保聯盟"]},
-                    {"groupName":"土地", "groupMember":["農陣"]},
-                    {"groupName":"性別", "groupMember":["婦女新知","台女連"]},
-                    {"groupName":"其他", "groupMember":["公督盟"]}];
+
+  $scope.ngoList = legApp.ngoList;
+
 
   //Group & NGO Selection Change
-  $scope.critiquerSelection = ["綠盟","地球公民","環保聯盟","農陣","婦女新知","台女連","公督盟"];
+  $scope.critiquerSelection = ["綠盟","地球公民","環保聯盟","農陣","婦女新知","台女連","公督盟","消基會"];
   $scope.critiquerSum = $scope.critiquerSelection.length;
   $scope.toggleCritiquer = function(){
 
@@ -85,7 +79,7 @@ legControllers.controller('rankCtrl',['$scope','$routeParams',
         current.prop("checked",true);
       });
       $scope.allCritiquerSelected = true;
-      $scope.critiquerSelection = ["綠盟","地球公民","環保聯盟","農陣","婦女新知","台女連","公督盟"];
+      $scope.critiquerSelection = ["綠盟","地球公民","環保聯盟","農陣","婦女新知","台女連","公督盟","消基會"];
     }else{
       $(".critiquerFilter").each(function(index,element){
         var current = $(element).find("input");

@@ -71,13 +71,12 @@
 
          <h3 class="ui dividing header">完整說明</h3>
          <p>{{event.content}}</p>
-         <h3 class="ui dividing header">喊冤專區</h3>
 
          <h3 class="ui dividing header">原始資料</h3>
 
          <div class="ui list">
 
-           <a class="item" ng-repeat='source in event.data' href=http://{{source.link}}>
+           <a class="item" ng-repeat='source in event.data' href={{source.link}} target="_new">
             <i class="right triangle icon"></i>
             {{source.title}}
           </a>

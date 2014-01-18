@@ -78,30 +78,17 @@
            <thead>
              <tr><th>No</th>
              <th>議題關注者</th>
-             <th>環保</th>
-             <th>勞工</th>
-             <th>性別</th>
-             <th>司法</th>
-             <th>人權</th>
-             <th>土地</th>
-             <th>教育</th>
-             <th>稅賦</th>
+             <th ng-repeat="c in categories">{{c}}</th>
              <th>總計</th>
            </tr></thead>
            <tbody>
              <tr ng-repeat="n in critiquers">
                <td>{{($index+1)}}</td>
-               <td><a href="#/critiquers/{{n.id}}"><img class="ui big avatar image" ng-src="{{n.logo}}">{{n.name}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/環保">{{n.CategorySum[0]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/勞工">{{n.CategorySum[1]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/性別">{{n.CategorySum[2]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/司法">{{n.CategorySum[3]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/人權">{{n.CategorySum[4]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/土地">{{n.CategorySum[5]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/教育">{{n.CategorySum[6]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}/稅賦">{{n.CategorySum[7]}}</a></td>
-               <td><a href="#/critiquers/{{n.id}}">{{n.CategorySum[8]}}</a></td>
-               </tr>
+ <td><a href="#/critiquers/{{n.id}}"><img class="ui big avatar image" ng-src="{{n.logo}}">{{n.name}}</a></td>
+ <td ng-repeat="c in categories"><a href="#/critiquers/{{n.id}}/{{c}}">{{n.CategorySum[$index]}}</a></td>
+ <td><a href="#/critiquers/{{n.id}}/{{c}}">{{n.CategorySum[categories.length]}}</a></td>
+
+ </tr>
            </tbody>
         </table>
     </div>

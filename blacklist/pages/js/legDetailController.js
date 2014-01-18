@@ -128,7 +128,7 @@ $scope.topMenuFilter = function(n){
                     {"groupName":"其他", "groupMember":["公督盟"]}];
 
   //Group & NGO Selection Change
-  $scope.critiquerSelection = ["綠盟","地球公民","環保聯盟","農陣","婦女新知","台女連","公督盟"];
+  $scope.critiquerSelection = ["綠盟","地球公民","環保聯盟","農陣","婦女新知","台女連","公督盟","消基會"];
   $scope.critiquerSum = $scope.critiquerSelection.length;
   $scope.toggleCritiquer = function(){
 

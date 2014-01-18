@@ -8,19 +8,27 @@ legApp.getCriData();
 ;
 //Global Variables
 var legApp={};
-legApp.categories = ['環保', '勞工', '性別', '司法','人權','土地','教育','稅賦'];
+legApp.categories = ['環保','食品','勞工', '性別', '司法','人權','土地','教育','稅賦'];
 legApp.lists =['有疑慮','不推薦','強烈反對'];
+
+legApp.ngoList = [{"groupName":"環保", "groupMember":["綠盟","地球公民","環保聯盟"]},
+  {"groupName":"土地", "groupMember":["農陣"]},
+  {"groupName":"性別", "groupMember":["婦女新知","台女連"]},
+  {"groupName":"其他", "groupMember":["公督盟","消基會"]}];
+
+
 function getCategoryIndex(name){
   var id = 0;
   switch(name){
       case '環保':id = 0; break;
-      case '勞工':id = 1; break;
-      case '性別':id = 2; break;
-      case '司法':id = 3; break;
-      case '人權':id = 4; break;
-      case '土地':id = 5; break;
-      case '教育':id = 6; break;
-      case '稅賦':id = 7; break;
+      case '食品':id = 1; break;
+      case '勞工':id = 2; break;
+      case '性別':id = 3; break;
+      case '司法':id = 4; break;
+      case '人權':id = 5; break;
+      case '土地':id = 6; break;
+      case '教育':id = 7; break;
+      case '稅賦':id = 8; break;
   }
   return id;
 }
@@ -195,6 +203,7 @@ legControllers.controller('legListCtrl', function($scope) {
 
 legControllers.controller('criListCtrl', function($scope) {
 
+  $scope.categories = legApp.categories;
   login($scope, function(){ });
   id = 0;
   $scope.addCriItem=function($scope, it) {

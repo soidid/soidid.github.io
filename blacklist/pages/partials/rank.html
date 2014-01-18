@@ -132,14 +132,7 @@
            <thead>
              <tr><th>No</th>
              <th>立委</th>
-             <th>環保</th>
-             <th>勞工</th>
-             <th>性別</th>
-             <th>司法</th>
-             <th>人權</th>
-             <th>土地</th>
-             <th>教育</th>
-             <th>稅賦</th>
+             <th ng-repeat="n in categories">{{n}}</th>
              <th>總計</th>
            </tr></thead>
            <tbody >
@@ -148,14 +141,8 @@
                <td><a href="#/legislators/{{n.id}}"><img class="ui big avatar image" ng-src="{{n.avatar}}">{{n.name}}</a></td>
                <!-- <td><a href="#/legislators/{{n.id}}/環保">{{n.listSum.environment}}</a></td> -->
 
-<td><a href="#/legislators/{{n.id}}/環保">{{(events[n.id][0]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
-<td><a href="#/legislators/{{n.id}}/勞工">{{(events[n.id][1]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
-<td><a href="#/legislators/{{n.id}}/性別">{{(events[n.id][2]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
-<td><a href="#/legislators/{{n.id}}/司法">{{(events[n.id][3]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
-<td><a href="#/legislators/{{n.id}}/人權">{{(events[n.id][4]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
-<td><a href="#/legislators/{{n.id}}/土地">{{(events[n.id][5]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
-<td><a href="#/legislators/{{n.id}}/教育">{{(events[n.id][6]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
-<td><a href="#/legislators/{{n.id}}/稅賦">{{(events[n.id][7]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
+  <td ng-repeat="c in categories">
+  <a href="#/legislators/{{n.id}}/{{c}}">{{(events[n.id][$index]|filter:critiquerFilter|filter:listFilter).length}}</a></td>
 <td><a href="#/legislators/{{n.id}}">
     {{(events[n.id][0]|filter:critiquerFilter|filter:listFilter).length +
       (events[n.id][1]|filter:critiquerFilter|filter:listFilter).length +
